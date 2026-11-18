@@ -410,37 +410,105 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     </div>
 
     <div class="sub">
-      <h3>0-3　打開 Code 分頁，選雲端硬碟<span class="self">自己按</span></h3>
-      <p>在 Claude 上方切到 <b>Code</b><br>選擇資料夾時點左邊的 <b>Google Drive → 我的雲端硬碟</b><br>不用自己開新資料夾<br>下一步 AI 會幫你建好</p>
+      <h3>0-3　打開 Code，選雲端硬碟資料夾<span class="self">自己按</span></h3>
+      <p>點左上角的「<b>&lt;/&gt;</b>」切到 Code<br>再點左邊的「<b>＋ 新增</b>」</p>
       <figure>
         <div class="mk">
-        <svg viewBox="0 0 680 230" role="img" aria-label="在 Code 分頁選擇我的雲端硬碟">
-          <rect class="mk-bg" x="0" y="0" width="680" height="230" rx="10"/>
-          <rect class="mk-panel" x="250" y="12" width="180" height="30" rx="7"/>
-          <text class="mk-d" x="264" y="32" font-size="13">Chat</text>
-          <text class="mk-d" x="310" y="32" font-size="13">Cowork</text>
-          <rect class="mk-sel" x="368" y="16" width="56" height="22" rx="5"/>
-          <text class="mk-t" x="380" y="32" font-size="13" font-weight="700">Code</text>
-          <rect class="mk-ring" x="362" y="9" width="68" height="36" rx="8"/>
-          <circle class="mk-dot" cx="434" cy="10" r="11"/><text class="mk-dott" x="430" y="15" font-size="12">1</text>
-          <rect class="mk-panel" x="120" y="66" width="440" height="146" rx="10"/>
-          <text class="mk-d" x="136" y="90" font-size="12">選擇資料夾</text>
-          <line class="mk-line" x1="230" y1="100" x2="230" y2="200"/>
-          <text class="mk-d" x="136" y="118" font-size="12">桌面</text>
-          <text class="mk-d" x="136" y="140" font-size="12">文件</text>
-          <text class="mk-t" x="136" y="166" font-size="12" font-weight="700">Google Drive</text>
-          <rect class="mk-sel" x="240" y="108" width="200" height="26" rx="5"/>
-          <text class="mk-t" x="252" y="126" font-size="13" font-weight="700">📁 我的雲端硬碟</text>
-          <text class="mk-d" x="252" y="152" font-size="12">📁 與我共用</text>
-          <rect class="mk-ring" x="234" y="102" width="212" height="38" rx="8"/>
-          <circle class="mk-dot" cx="448" cy="102" r="11"/><text class="mk-dott" x="444" y="107" font-size="12">2</text>
-          <rect class="mk-btn" x="468" y="174" width="80" height="28" rx="6"/>
-          <text class="mk-btnt" x="494" y="193" font-size="13">打開</text>
+        <svg viewBox="0 0 680 300" role="img" aria-label="左上角切到 Code，再點左邊的新增">
+          <rect class="mk-bg" x="0" y="0" width="680" height="300" rx="10"/>
+          <line class="mk-line" x1="128" y1="0" x2="128" y2="300"/>
+          <g class="mk-d" font-size="11"><text x="12" y="22">☰</text><text x="30" y="22">◫</text><text x="48" y="22">‹</text><text x="60" y="22">›</text></g>
+          <rect class="mk-panel" x="74" y="8" width="48" height="20" rx="6"/>
+          <text class="mk-d" x="80" y="22" font-size="11">◌</text>
+          <rect class="mk-sel" x="98" y="10" width="22" height="16" rx="4"/>
+          <text class="mk-t" x="100" y="22" font-size="10" font-weight="700">&lt;/&gt;</text>
+          <rect class="mk-ring" x="93" y="4" width="32" height="28" rx="7"/>
+          <circle class="mk-dot" cx="128" cy="6" r="10"/><text class="mk-dott" x="124" y="10" font-size="11">1</text>
+          <text class="mk-t" x="18" y="58" font-size="12">＋ 新增</text>
+          <rect class="mk-ring" x="8" y="42" width="112" height="24" rx="6"/>
+          <circle class="mk-dot" cx="120" cy="44" r="10"/><text class="mk-dott" x="116" y="48" font-size="11">2</text>
+          <g class="mk-t" font-size="12"><text x="18" y="86">⌕ 搜尋</text><text x="18" y="108">▢ 專案</text><text x="18" y="130">▣ 成品</text><text x="18" y="152">◷ 排程任務</text><text x="18" y="174">✣ 外掛程式</text></g>
+          <line class="mk-line" x1="0" y1="270" x2="128" y2="270"/>
+          <circle cx="22" cy="285" r="7" fill="#5B6B6F"/>
+          <text class="mk-d" x="36" y="289" font-size="11">你的帳號</text>
+
+          <rect class="mk-panel" x="300" y="90" width="230" height="36" rx="8"/>
+          <text class="mk-t" x="314" y="113" font-size="12">選擇環境 ⌄</text>
+          <rect class="mk-panel" x="300" y="134" width="230" height="32" rx="8"/>
+          <text class="mk-t" x="314" y="155" font-size="12">▢ 選擇工作資料夾</text>
+          <rect class="mk-panel" x="190" y="226" width="450" height="32" rx="10"/>
+          <text class="mk-d" x="202" y="246" font-size="14">＋</text>
+          <text class="mk-d" x="222" y="246" font-size="11">描述任務或提出問題</text>
+          <text class="mk-t" x="200" y="280" font-size="11">▭ 這台電腦 ⌄</text>
+          <text class="mk-t" x="290" y="280" font-size="11">▢ 選擇資料夾 ⌄</text>
+          <text class="mk-d" x="600" y="280" font-size="11">自動</text>
         </svg>
         </div>
-        <figcaption>示意圖：① 切到 Code　② 選「Google Drive → 我的雲端硬碟」→ 打開。</figcaption>
+        <figcaption>照實際畫面繪製：① 左上角的「&lt;/&gt;」切到 Code　② 左邊「＋ 新增」。</figcaption>
       </figure>
-      <p class="tip"><b>從這裡開始</b><br>之後每一步都只要複製提示詞<br>貼到 Code 分頁的輸入框<br>按 Enter</p>
+
+      <p>輸入框下面左邊那顆是「環境」<br>確認選的是「<b>這台電腦</b>」<br>不要選「自動」或其他雲端環境</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 250" role="img" aria-label="環境選單：選本機的這台電腦">
+          <rect class="mk-bg" x="0" y="0" width="680" height="250" rx="10"/>
+          <rect class="mk-panel" x="200" y="16" width="280" height="30" rx="8"/>
+          <text class="mk-t" x="214" y="36" font-size="12">選擇環境 ⌄</text>
+          <rect class="mk-sel" x="200" y="54" width="280" height="184" rx="12"/>
+          <text class="mk-d" x="216" y="78" font-size="12">搜尋環境</text>
+          <line class="mk-line" x1="200" y1="90" x2="480" y2="90"/>
+          <text class="mk-d" x="216" y="110" font-size="11">本機</text>
+          <text class="mk-t" x="216" y="132" font-size="13" font-weight="700">這台電腦</text>
+          <text x="456" y="132" font-size="14" fill="#5B8DEF">✓</text>
+          <rect class="mk-ring" x="206" y="114" width="268" height="28" rx="7"/>
+          <circle class="mk-dot" cx="476" cy="114" r="11"/><text class="mk-dott" x="472" y="119" font-size="12">3</text>
+          <line class="mk-line" x1="216" y1="152" x2="464" y2="152"/>
+          <text class="mk-d" x="216" y="170" font-size="11">雲端</text>
+          <text class="mk-d" x="216" y="190" font-size="12">自動</text>
+          <text class="mk-d" x="216" y="206" font-size="10">依存放庫自動選擇</text>
+          <text class="mk-d" x="216" y="228" font-size="12">＋ 新增環境</text>
+          <text class="mk-d" x="500" y="198" font-size="11">← 雲端的不要選</text>
+        </svg>
+        </div>
+        <figcaption>照實際畫面繪製：③ 選「本機」下面的「這台電腦」。雲端環境要選 GitHub 儲存庫，學員用不到。</figcaption>
+      </figure>
+
+      <p>點旁邊的「<b>選擇資料夾</b>」→「<b>開啟資料夾⋯</b>」<br>在跳出來的視窗選<br><b>Google Drive → 我的雲端硬碟</b><br>按「開啟」<br>不用自己開新資料夾<br>下一步 AI 會幫你建好</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 300" role="img" aria-label="選擇資料夾，開啟資料夾，選 Google Drive 的我的雲端硬碟">
+          <rect class="mk-bg" x="0" y="0" width="680" height="300" rx="10"/>
+          <rect class="mk-sel" x="20" y="20" width="200" height="104" rx="10"/>
+          <text class="mk-t" x="36" y="44" font-size="12" font-weight="700">無資料夾</text>
+          <text x="196" y="44" font-size="13" fill="#5B8DEF">✓</text>
+          <line class="mk-line" x1="32" y1="58" x2="208" y2="58"/>
+          <text class="mk-t" x="36" y="84" font-size="12" font-weight="700">開啟資料夾⋯</text>
+          <rect class="mk-ring" x="26" y="66" width="188" height="28" rx="7"/>
+          <circle class="mk-dot" cx="216" cy="66" r="11"/><text class="mk-dott" x="212" y="71" font-size="12">4</text>
+          <rect class="mk-panel" x="20" y="132" width="300" height="28" rx="8"/>
+          <text class="mk-t" x="32" y="151" font-size="11">▭ 這台電腦 ⌄</text>
+          <text class="mk-t" x="120" y="151" font-size="11">▢ 選擇資料夾 ⌄</text>
+
+          <rect class="mk-panel" x="250" y="60" width="410" height="220" rx="10"/>
+          <text class="mk-d" x="266" y="84" font-size="12">開啟資料夾</text>
+          <line class="mk-line" x1="370" y1="96" x2="370" y2="264"/>
+          <text class="mk-d" x="266" y="116" font-size="12">桌面</text>
+          <text class="mk-d" x="266" y="140" font-size="12">文件</text>
+          <text class="mk-d" x="266" y="164" font-size="12">下載</text>
+          <text class="mk-t" x="266" y="194" font-size="12" font-weight="700">Google Drive</text>
+          <rect class="mk-sel" x="380" y="104" width="200" height="26" rx="5"/>
+          <text class="mk-t" x="392" y="122" font-size="13" font-weight="700">▢ 我的雲端硬碟</text>
+          <text class="mk-d" x="392" y="150" font-size="12">▢ 與我共用</text>
+          <rect class="mk-ring" x="374" y="98" width="212" height="38" rx="8"/>
+          <circle class="mk-dot" cx="588" cy="98" r="11"/><text class="mk-dott" x="584" y="103" font-size="12">5</text>
+          <rect class="mk-btn" x="566" y="238" width="80" height="28" rx="6"/>
+          <text class="mk-btnt" x="592" y="257" font-size="13">開啟</text>
+        </svg>
+        </div>
+        <figcaption>左邊照實際畫面繪製，右邊是示意圖：④「選擇資料夾 → 開啟資料夾⋯」　⑤ 選「Google Drive → 我的雲端硬碟」→ 開啟。Windows 的 Google Drive 通常在「本機」裡，名稱像「Google Drive (G:)」。</figcaption>
+      </figure>
+      <p class="small muted">選好之後<br>輸入框下面會顯示「這台電腦」和「我的雲端硬碟」<br>這樣就對了</p>
+      <p class="tip"><b>從這裡開始</b><br>之後每一步都只要複製提示詞<br>貼到 Code 的輸入框<br>按 Enter</p>
     </div>
   </div>
 </section>

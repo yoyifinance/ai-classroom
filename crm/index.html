@@ -653,6 +653,7 @@ figcaption{line-height:1.7;padding-top:2px}
       <input type="text" id="in-path" placeholder="例如：客戶資料">
     </label>
     <p class="small muted" id="path-hint"></p>
+    <p class="tip"><b>用講的就好</b><br>AI 很聰明<br>不用打「桌面/保險/客戶資料」這種格式<br>直接用跟人聊天的方式告訴它<br>例如「我的客戶資料在桌面的保險資料夾裡面」<br>它就聽得懂<br>之後每一步也是這樣<br>有不懂的直接問它</p>
     <div class="prompt"><div class="bar"><span>提示詞 2　盤點客戶資料</span><button class="copy" data-for="p2">複製</button></div><pre id="p2"></pre></div>
   </div>
 </section>
@@ -1283,8 +1284,8 @@ figcaption{line-height:1.7;padding-top:2px}
 
   function srcDesc(){
     var p=(S.path||'').trim();
-    if(S.src==='drive')return '我的 Google 雲端硬碟裡的「'+(p||'（資料夾名稱）')+'」資料夾';
-    if(S.src==='local')return '我電腦裡的「'+(p||'（資料夾路徑）')+'」';
+    if(S.src==='drive')return '我 Google 雲端硬碟裡的客戶資料（位置：'+(p||'（寫資料夾在哪）')+'）';
+    if(S.src==='local')return '我電腦裡的客戶資料（位置：'+(p||'（寫資料夾在哪）')+'）';
     return '我的客戶資料'+(p?'（我記得名稱有「'+p+'」）':'');
   }
 
@@ -1308,10 +1309,10 @@ figcaption{line-height:1.7;padding-top:2px}
 
     // step 2 labels
     var pl=$('path-label'),pin=$('in-path'),ph=$('path-hint');
-    if(S.src==='drive'){pl.firstChild.textContent='雲端硬碟裡的資料夾名稱';pin.placeholder='例如：客戶資料';
-      ph.innerHTML='寫資料夾名稱就好<br>在子資料夾裡的話<br>可以寫「工作／客戶資料」';}
-    else if(S.src==='local'){pl.firstChild.textContent='電腦裡的資料夾路徑';pin.placeholder='例如：/Users/你的名字/Desktop/客戶資料';
-      ph.innerHTML='懶人做法<br>把資料夾直接拖進 Claude 的輸入框<br>路徑會自己跑出來<br>複製貼過來就好';}
+    if(S.src==='drive'){pl.firstChild.textContent='資料夾在雲端硬碟的哪裡（用講的就好）';pin.placeholder='例如：工作資料夾裡面的客戶資料';
+      ph.innerHTML='像跟人說話一樣寫就好<br>不用打很制式的路徑';}
+    else if(S.src==='local'){pl.firstChild.textContent='資料夾在電腦的哪裡（用講的就好）';pin.placeholder='例如：桌面的保險資料夾裡面的客戶資料';
+      ph.innerHTML='像跟人說話一樣寫就好<br>不用打很制式的路徑<br>想更準的話<br>也可以把資料夾直接拖進 Claude 的輸入框<br>路徑會自己跑出來，複製貼過來';}
     else{pl.firstChild.textContent='記得的資料夾名稱（可以空白）';pin.placeholder='例如：客戶、訂單';
       ph.innerHTML='AI 會在雲端硬碟和電腦裡幫你找<br>找到後先問你是不是這個';}
 

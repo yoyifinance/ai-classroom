@@ -410,7 +410,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     </div>
 
     <div class="sub">
-      <h3>0-3　打開 Code，選雲端硬碟資料夾<span class="self">自己按</span></h3>
+      <h3>0-3　打開 Code，選「Claude」資料夾<span class="self">自己按</span></h3>
       <p>點左上角的「<b>&lt;/&gt;</b>」切到 Code<br>再點左邊的「<b>＋ 新增</b>」</p>
       <figure>
         <div class="mk">
@@ -447,7 +447,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
         <figcaption>照實際畫面繪製：① 左上角的「&lt;/&gt;」切到 Code　② 左邊「＋ 新增」。</figcaption>
       </figure>
 
-      <p>輸入框下面左邊那顆是「環境」<br>確認選的是「<b>這台電腦</b>」<br>不要選「自動」或其他雲端環境</p>
+      <p>輸入框下面左邊那顆是「環境」<br>確認選的是「<b>這台電腦</b>」<br>不要選「自動」或其他雲端環境<br>旁邊的資料夾先不用選</p>
       <figure>
         <div class="mk">
         <svg viewBox="0 0 680 250" role="img" aria-label="環境選單：選本機的這台電腦">
@@ -473,10 +473,16 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
         <figcaption>照實際畫面繪製：③ 選「本機」下面的「這台電腦」。雲端環境要選 GitHub 儲存庫，學員用不到。</figcaption>
       </figure>
 
-      <p>點旁邊的「<b>選擇資料夾</b>」→「<b>開啟資料夾⋯</b>」<br>在跳出來的視窗<br>左邊點「本機」下面的「<b>Google Drive</b>」<br>再點「<b>我的雲端硬碟</b>」<br>按「<b>選擇資料夾</b>」<br>不用自己開新資料夾<br>下一步 AI 會幫你建好</p>
+      <h3>讓 AI 幫你建「Claude」資料夾<span class="ai">交給 AI</span></h3>
+      <p>AI 只碰得到你選的資料夾<br>所以先開一個專門給它用的「Claude」資料夾<br>範圍比較小，比較安全<br>這個資料夾不用自己建<br>把下面這段貼到輸入框，按 Enter</p>
+      <div class="prompt"><div class="bar"><span>提示詞 0　建立 Claude 資料夾</span><button class="copy" data-for="p0">複製</button></div><pre id="p0">用 Google Drive 連接器，在我的 Google 雲端硬碟最外層（我的雲端硬碟）建立一個資料夾，名稱叫「Claude」。已經有就不用再建。
+做好後用一句話告訴我。</pre></div>
+      <p class="small muted">它說建好之後<br>等大約 10 秒讓電腦同步</p>
+      <h3>重新開一次，選「Claude」資料夾<span class="self">自己按</span></h3>
+      <p>再按一次左邊的「<b>＋ 新增</b>」<br>環境一樣選「這台電腦」<br>點旁邊的「<b>選擇資料夾</b>」→「<b>開啟資料夾⋯</b>」<br>在跳出來的視窗<br>左邊點「本機」下面的「<b>Google Drive</b>」<br>進到「<b>我的雲端硬碟</b>」<br>點「<b>Claude</b>」資料夾<br>按「<b>選擇資料夾</b>」</p>
       <figure>
         <div class="mk">
-        <svg viewBox="0 0 680 300" role="img" aria-label="開啟資料夾，在視窗左邊點 Google Drive，選我的雲端硬碟，按選擇資料夾">
+        <svg viewBox="0 0 680 300" role="img" aria-label="開啟資料夾，在視窗左邊點 Google Drive，進到我的雲端硬碟，選 Claude，按選擇資料夾">
           <rect class="mk-bg" x="0" y="0" width="680" height="300" rx="10"/>
           <rect class="mk-sel" x="20" y="20" width="200" height="104" rx="10"/>
           <text class="mk-t" x="36" y="44" font-size="12" font-weight="700">無資料夾</text>
@@ -494,7 +500,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
           <text class="mk-t" x="256" y="37" font-size="11">選擇資料夾</text>
           <text class="mk-d" x="646" y="37" font-size="12">×</text>
           <rect class="mk-bg" x="254" y="52" width="400" height="20" rx="4"/>
-          <text class="mk-d" x="262" y="66" font-size="10">本機 › Google Drive › 我的雲端硬碟</text>
+          <text class="mk-d" x="262" y="66" font-size="10">本機 › Google Drive › 我的雲端硬碟 ›</text>
           <line class="mk-line" x1="372" y1="80" x2="372" y2="240"/>
           <text class="mk-d" x="256" y="100" font-size="11">⌄ 本機</text>
           <text class="mk-d" x="270" y="122" font-size="11">開機碟 (C:)</text>
@@ -506,13 +512,13 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
           <circle class="mk-dot" cx="364" cy="126" r="10"/><text class="mk-dott" x="360" y="130" font-size="11">5</text>
           <text class="mk-d" x="256" y="170" font-size="11">› 網路</text>
           <rect x="384" y="92" width="22" height="16" rx="2" fill="#E8B84A"/>
-          <text class="mk-t" x="414" y="105" font-size="12" font-weight="700">我的雲端硬碟</text>
-          <rect class="mk-ring" x="378" y="86" width="120" height="28" rx="6"/>
-          <circle class="mk-dot" cx="498" cy="86" r="10"/><text class="mk-dott" x="494" y="90" font-size="11">6</text>
+          <text class="mk-t" x="414" y="105" font-size="12" font-weight="700">Claude</text>
+          <rect class="mk-ring" x="378" y="86" width="90" height="28" rx="6"/>
+          <circle class="mk-dot" cx="468" cy="86" r="10"/><text class="mk-dott" x="464" y="90" font-size="11">6</text>
           <line class="mk-line" x1="244" y1="244" x2="664" y2="244"/>
           <text class="mk-d" x="300" y="268" font-size="11">資料夾：</text>
           <rect class="mk-bg" x="346" y="254" width="150" height="20" rx="3"/>
-          <text class="mk-t" x="352" y="268" font-size="11">我的雲端硬碟</text>
+          <text class="mk-t" x="352" y="268" font-size="11">Claude</text>
           <rect class="mk-btn" x="508" y="252" width="80" height="24" rx="4"/>
           <text class="mk-btnt" x="520" y="268" font-size="11">選擇資料夾</text>
           <rect class="mk-ring" x="503" y="247" width="90" height="34" rx="7"/>
@@ -521,9 +527,9 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
           <text class="mk-d" x="614" y="268" font-size="11">取消</text>
         </svg>
         </div>
-        <figcaption>照 Windows 實際畫面繪製：④「選擇資料夾 → 開啟資料夾⋯」　⑤ 左邊「本機 → Google Drive」　⑥「我的雲端硬碟」　⑦「選擇資料夾」。Mac 是在 Finder 視窗左邊點「Google Drive」，再選「我的雲端硬碟」按「打開」。看到的資料夾名稱也可能是「Google雲端硬碟」，意思一樣。</figcaption>
+        <figcaption>照 Windows 實際畫面繪製：④「選擇資料夾 → 開啟資料夾⋯」　⑤ 左邊「本機 → Google Drive」　⑥ 進到「我的雲端硬碟」，點「Claude」　⑦「選擇資料夾」。Mac 是在 Finder 視窗左邊點「Google Drive」，進到「我的雲端硬碟」選「Claude」，按「打開」。看到的資料夾名稱也可能是「Google雲端硬碟」，意思一樣。</figcaption>
       </figure>
-      <p class="small muted">選好之後<br>輸入框下面會顯示「這台電腦」和「我的雲端硬碟」<br>這樣就對了</p>
+      <p class="small muted">選好之後<br>輸入框下面會顯示「這台電腦」和「Claude」<br>這樣就對了<br>之後每次用都是這樣開</p>
       <p class="tip"><b>從這裡開始</b><br>之後每一步都只要複製提示詞<br>貼到 Code 的輸入框<br>按 Enter</p>
     </div>
   </div>
@@ -729,9 +735,9 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
           <rect class="mk-panel" x="374" y="80" width="262" height="112" rx="16"/>
           <text class="mk-t" x="388" y="104" font-size="13">字詞</text>
           <text class="mk-t" x="440" y="104" font-size="11">先用 Google Drive 連接器讀我</text>
-          <text class="mk-t" x="440" y="122" font-size="11">雲端硬碟裡的 CLAUDE.md，照</text>
-          <text class="mk-t" x="440" y="140" font-size="11">裡面的規則做。接下來我要</text>
-          <text class="mk-t" x="440" y="158" font-size="11">更新客戶紀錄：</text>
+          <text class="mk-t" x="440" y="122" font-size="11">雲端硬碟「Claude」資料夾裡的</text>
+          <text class="mk-t" x="440" y="140" font-size="11">CLAUDE.md，照裡面的規則做。</text>
+          <text class="mk-t" x="440" y="158" font-size="11">接下來我要更新客戶紀錄：</text>
           <line class="mk-line" x1="388" y1="168" x2="622" y2="168"/>
           <rect class="mk-ring" x="432" y="88" width="196" height="76" rx="7"/>
           <circle class="mk-dot" cx="628" cy="86" r="11"/><text class="mk-dott" x="624" y="91" font-size="12">2</text>
@@ -786,6 +792,15 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
       <summary>連接 Google Drive 可以叫 AI 幫我按嗎？</summary>
       <div>
         <p>不行<br>連接時要登入你的 Google 帳號、按「允許」<br>這是授權你自己的帳號<br>只能本人操作<br>AI 不能代替你登入<br>好消息是只要做一次<br>之後都不用再按</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>為什麼要另外開一個「Claude」資料夾？客戶資料要搬進去嗎？</summary>
+      <div>
+        <p>AI 只碰得到你選的資料夾<br>專門開一個給它用<br>它就不會亂翻雲端硬碟裡其他東西</p>
+        <p>客戶資料不用搬<br>放在原本的地方就好<br>第 2 步告訴它資料在哪<br>它會用 Google Drive 連接器去讀</p>
+        <p>不想讓 AI 建也可以自己建<br>在「選擇資料夾」視窗上面按「新增資料夾」<br>取名「Claude」就好</p>
       </div>
     </details>
 
@@ -1211,7 +1226,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     $('p1').textContent=
 opener+who+'，接下來要請你幫我把客戶資料整理成一份 Google 試算表，之後也會請你幫我新增和修改'+d.rec+'。\n\n'+
 '請你先做這幾件事：\n'+
-'1. 在目前這個資料夾（我的雲端硬碟）裡，建立一個資料夾叫「AI助理」，之後你做的檔案都放在這裡（已經有就沿用）。\n'+
+'1. 在目前這個資料夾（我的雲端硬碟裡的「Claude」資料夾）裡，建立一個資料夾叫「AI助理」，之後你做的檔案都放在這裡（已經有就沿用）。\n'+
 '2. 在目前這個資料夾建立 CLAUDE.md，把下面的規則寫進去（它在 Google 雲端硬碟，換電腦也讀得到），不要只存在電腦本機。已經有 CLAUDE.md 的話，把規則加在後面，不要蓋掉原本的內容。\n'+
 '3. 確認你能用 Google Drive 和 Google Sheets 連接器；如果連不上，一步一步教我怎麼連。\n\n'+
 '規則：\n'+
@@ -1296,7 +1311,7 @@ c('幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要
 
     $('p7a').textContent=d.f1.prompt(form('f1'),c);
     $('p7b').textContent=d.f2.prompt(form('f2'),c);
-    var p8=c('先用 Google Drive 連接器讀我雲端硬碟裡的 CLAUDE.md，照裡面的規則做。')+'\n接下來我要更新客戶紀錄：';
+    var p8=c('先用 Google Drive 連接器讀我雲端硬碟「Claude」資料夾裡的 CLAUDE.md，照裡面的規則做。')+'\n接下來我要更新客戶紀錄：';
     $('p8').textContent=p8;
     $('p8-demo').textContent=p8.split('\n')[0]+'在客戶紀錄新增一位客戶：王小明';
     $('p7c').textContent=[ASK_WEEK].concat(d.ask).map(c).join('\n\n');

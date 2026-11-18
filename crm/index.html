@@ -668,6 +668,13 @@ figcaption{line-height:1.7;padding-top:2px}
     <label class="f" for="in-path" id="path-label">資料夾名稱或路徑
       <input type="text" id="in-path" placeholder="例如：客戶資料">
     </label>
+    <div id="copy-box" class="crow" style="grid-template-columns:150px minmax(0,1fr)"><b>原始檔案要不要<br>複製一份到雲端？</b>
+      <div class="seg" id="copyf">
+        <label><input type="radio" name="copyf" value="yes" id="copyf-yes"><span>要，手機也能點開看</span></label>
+        <label><input type="radio" name="copyf" value="no" id="copyf-no"><span>不要，只記檔案位置</span></label>
+      </div>
+    </div>
+    <p class="small muted" id="copy-hint"></p>
     <p class="small muted" id="path-hint"></p>
     <p class="tip"><b>用講的就好</b><br>AI 很聰明<br>不用打「桌面/保險/客戶資料」這種格式<br>直接用跟人聊天的方式告訴它<br>例如「我的客戶資料在桌面的保險資料夾裡面」<br>它就聽得懂<br>之後每一步也是這樣<br>有不懂的直接問它</p>
     <div class="prompt"><div class="bar"><span>提示詞 2　盤點客戶資料</span><button class="copy" data-for="p2">複製</button></div><pre id="p2"></pre></div>
@@ -742,6 +749,44 @@ figcaption{line-height:1.7;padding-top:2px}
 
     <div id="remind-box" class="body" hidden>
       <div class="sub">
+        <h3>先打開手機的 Claude 通知<span class="self">自己按</span></h3>
+        <div class="ms">
+          <p>手機 Claude App<br>左上角選單 → 左下角頭像 →「設定」→「通知」<br>把開關<b>全部打開</b></p>
+          <figure>
+            <div class="mk">
+            <svg viewBox="0 0 680 330" role="img" aria-label="手機 Claude App 設定裡的通知，全部打開">
+              <rect class="mk-bg" x="0" y="0" width="680" height="330" rx="10"/>
+              <rect x="30" y="14" width="290" height="302" rx="26" fill="#111"/>
+              <text class="mk-t" x="155" y="50" font-size="14" font-weight="700">設定</text>
+              <text class="mk-d" x="48" y="78" font-size="10">帳戶</text>
+              <rect class="mk-panel" x="44" y="86" width="262" height="140" rx="14"/>
+              <g class="mk-t" font-size="12"><text x="62" y="110">個人資料</text><text x="62" y="138">帳單</text><text x="62" y="166">使用量</text><text x="62" y="194" font-weight="700">通知</text><text x="62" y="218">時間與專注</text></g>
+              <g class="mk-d" font-size="12"><text x="290" y="110">›</text><text x="290" y="138">›</text><text x="290" y="166">›</text><text x="290" y="194">›</text></g>
+              <rect class="mk-ring" x="50" y="176" width="252" height="26" rx="7"/>
+              <circle class="mk-dot" cx="302" cy="176" r="11"/><text class="mk-dott" x="298" y="181" font-size="12">1</text>
+              <text class="mk-d" x="48" y="252" font-size="10">應用程式</text>
+              <rect class="mk-panel" x="44" y="260" width="262" height="44" rx="14"/>
+              <g class="mk-t" font-size="12"><text x="62" y="287">功能・Claude Code・連接器⋯</text></g>
+
+              <rect x="360" y="14" width="290" height="302" rx="26" fill="#111"/>
+              <text class="mk-t" x="490" y="50" font-size="14" font-weight="700">通知</text>
+              <rect class="mk-panel" x="374" y="68" width="262" height="112" rx="14"/>
+              <g class="mk-t" font-size="12"><text x="390" y="94">回覆</text><text x="390" y="130">排程任務</text><text x="390" y="166">研究已完成</text></g>
+              <rect class="mk-panel" x="374" y="190" width="262" height="76" rx="14"/>
+              <g class="mk-t" font-size="12"><text x="390" y="216">Code 與專案更新</text><text x="390" y="252">Code 權限請求</text></g>
+              <rect class="mk-panel" x="374" y="274" width="262" height="34" rx="14"/>
+              <text class="mk-t" x="390" y="296" font-size="12">產品更新</text>
+              <g fill="#5B8DEF"><rect x="582" y="82" width="38" height="20" rx="10"/><rect x="582" y="118" width="38" height="20" rx="10"/><rect x="582" y="154" width="38" height="20" rx="10"/><rect x="582" y="204" width="38" height="20" rx="10"/><rect x="582" y="240" width="38" height="20" rx="10"/><rect x="582" y="281" width="38" height="20" rx="10"/></g>
+              <g fill="#fff"><circle cx="610" cy="92" r="8"/><circle cx="610" cy="128" r="8"/><circle cx="610" cy="164" r="8"/><circle cx="610" cy="214" r="8"/><circle cx="610" cy="250" r="8"/><circle cx="610" cy="291" r="8"/></g>
+              <rect class="mk-ring" x="574" y="74" width="54" height="236" rx="10"/>
+              <circle class="mk-dot" cx="628" cy="72" r="11"/><text class="mk-dott" x="624" y="77" font-size="12">2</text>
+            </svg>
+            </div>
+            <figcaption>照手機實際畫面繪製：①「設定」裡的「通知」　② 開關全部打開（最重要的是「排程任務」）。</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="sub">
         <h3>通知長這樣</h3>
         <div class="phone" aria-label="推播範例">
           <div class="notif" id="notif">
@@ -750,12 +795,8 @@ figcaption{line-height:1.7;padding-top:2px}
         <p class="small muted">範例的名字是虛構的<br>推播只寫名字和事項<br>不會放身分證字號、卡號、地址</p>
       </div>
       <div class="sub">
-        <h3>多久通知一次？</h3>
-        <div class="seg" id="freq">
-          <label><input type="radio" name="freq" value="1" id="freq-1"><span>每週一次</span></label>
-          <label><input type="radio" name="freq" value="2" id="freq-2"><span>每週兩次</span></label>
-          <label><input type="radio" name="freq" value="7" id="freq-7"><span>每天</span></label>
-        </div>
+        <h3>哪幾天通知？</h3>
+        <p class="small muted">勾你要的星期就好<br>全部勾就是每天</p>
         <div class="check" id="days"></div>
         <label class="f" for="in-time" style="max-width:160px">幾點通知（台灣時間）
           <input type="time" id="in-time" value="08:30">
@@ -766,7 +807,7 @@ figcaption{line-height:1.7;padding-top:2px}
         <div class="choice-table" id="items"></div>
       </div>
       <div class="prompt"><div class="bar"><span>提示詞 6　開啟提醒</span><button class="copy" data-for="p6">複製</button></div><pre id="p6"></pre></div>
-      <p class="tip"><b>測試時把手機鎖屏</b><br>手機開著 Claude App 的時候推播不會跳出來<br>雲端排程有時會晚幾分鐘才跑</p>
+      <p class="tip"><b>貼完提示詞馬上測試</b><br>AI 會設一個 1 分鐘後的測試推播<br>你先離開 Claude 畫面<br>回到手機桌面或把手機鎖屏<br>等 1～2 分鐘<br>收到「客戶提醒：測試成功」就代表設定好了<br>手機開著 Claude App 的時候推播不會跳出來</p>
     </div>
     <div id="remind-off" class="off-note" hidden>
       不開也沒關係<br>想知道該聯絡誰的時候<br>直接問「<span id="ask-off"></span>」就可以了
@@ -946,8 +987,8 @@ figcaption{line-height:1.7;padding-top:2px}
       <summary>設定好提醒，手機卻沒收到通知？</summary>
       <div>
         <ol class="plain">
-          <li>手機的 Claude App 要登入同一個帳號<br>並在手機設定裡允許 Claude 發通知</li>
-          <li>測試時把手機鎖屏<br>開著 Claude App 時推播不會跳出來</li>
+          <li>手機的 Claude App 要登入同一個帳號<br>在 Claude App 的「設定 → 通知」把開關全部打開<br>手機本身的設定也要允許 Claude 發通知</li>
+          <li>測試時先離開 Claude 畫面或把手機鎖屏<br>開著 Claude App 時推播不會跳出來</li>
           <li>雲端排程可能晚幾分鐘才跑<br>等 5～10 分鐘再看</li>
           <li>還是沒有<br>就問你的 AI 助理：「提醒排程有沒有跑？為什麼我沒收到？」</li>
         </ol>
@@ -1163,7 +1204,7 @@ figcaption{line-height:1.7;padding-top:2px}
   };
 
   /* ---------- 狀態 ---------- */
-  var S={batch:'ten',ind:'ins',nameMode:'new',name:'',company:'',trade:'',client:'',src:'drive',path:'',theme:'lake',
+  var S={copyf:'yes',batch:'ten',ind:'ins',nameMode:'new',name:'',company:'',trade:'',client:'',src:'drive',path:'',theme:'lake',
     privacy:{},remind:'',freq:'1',days:['一'],time:'08:30',items:{},forms:{}};
   try{
     var saved=JSON.parse(localStorage.getItem(KEY)||'null');
@@ -1274,7 +1315,7 @@ figcaption{line-height:1.7;padding-top:2px}
     daysBox.innerHTML='<span>星期：</span>';
     DAYS.forEach(function(d,i){
       var w=document.createElement('label');w.className='check';w.style.gap='4px';
-      w.innerHTML='<input type="checkbox" id="day-'+i+'"'+(S.days.indexOf(d)>=0?' checked':'')+(S.freq==='7'?' disabled':'')+'>'+d;
+      w.innerHTML='<input type="checkbox" id="day-'+i+'"'+(S.days.indexOf(d)>=0?' checked':'')+'>'+d;
       w.querySelector('input').addEventListener('change',function(e){
         if(e.target.checked){if(S.days.indexOf(d)<0)S.days.push(d);}else{S.days=S.days.filter(function(x){return x!==d});}
         S.days.sort(function(a,b){return DAYS.indexOf(a)-DAYS.indexOf(b)});render();});
@@ -1287,10 +1328,10 @@ figcaption{line-height:1.7;padding-top:2px}
       r.addEventListener('change',function(){S[key]=r.value;if(after)after();render();});
     });
   }
-  bindRadios('freq','freq',function(){S.days=S.freq==='1'?['一']:S.freq==='2'?['一','五']:DAYS.slice();drawDays();});
   bindRadios('remind','remind');
   bindRadios('src','src');
   bindRadios('batch','batch');
+  bindRadios('copyf','copyf');
 
   /* 日常表單 */
   function buildFields(n){
@@ -1326,6 +1367,15 @@ figcaption{line-height:1.7;padding-top:2px}
   $('in-time').value=S.time;
   $('in-time').addEventListener('input',function(e){S.time=e.target.value||'08:30';render();});
 
+  /* 原始檔案：雲端硬碟本來就有連結；電腦裡的看學員選要不要複製上雲端 */
+  function fileMode(){return S.src==='drive'?'drive':(S.copyf==='no'?'path':'copy');}
+  function fileCol(){return fileMode()==='path'?'原始檔案位置':'原始檔案連結';}
+  function fileNote(){
+    var m=fileMode();
+    if(m==='drive')return '，並附上原始檔案在雲端硬碟的連結';
+    if(m==='copy')return '，並把這位客戶的原始檔案複製一份到雲端「Claude/AI助理/原始檔案/客戶名字」資料夾（原本的檔案不要動），表格附上雲端的連結，這樣手機也能點開';
+    return '，在「原始檔案位置」寫檔案在電腦裡的位置就好，不用複製';
+  }
   function srcDesc(){
     var p=(S.path||'').trim();
     if(S.src==='drive')return '我 Google 雲端硬碟裡的客戶資料（位置：'+(p||'（寫資料夾在哪）')+'）';
@@ -1351,6 +1401,8 @@ figcaption{line-height:1.7;padding-top:2px}
     var cn=$('f1-cardno');if(cn)cn.placeholder=S.privacy.card==='last4'?'只填末四碼，例如 1234':'例如 1234';
     var nc=$('f2-ncard');if(nc)nc.placeholder=S.privacy.card==='last4'?'只填末四碼，例如 5678':'例如 5678';
 
+    $('copy-box').hidden=S.src==='drive';$('copy-hint').hidden=S.src==='drive';
+    $('copy-hint').innerHTML=S.copyf==='no'?'表格只寫檔案在電腦的哪裡<br>要看原始檔案得回到這台電腦':'AI 會把原始檔案複製一份到雲端的 Claude 資料夾<br>原本的檔案不會動<br>在手機或其他電腦也能點連結打開';
     // step 2 labels
     var pl=$('path-label'),pin=$('in-path'),ph=$('path-hint');
     if(S.src==='drive'){pl.firstChild.textContent='資料夾在雲端硬碟的哪裡（用講的就好）';pin.placeholder='例如：工作資料夾裡面的客戶資料';
@@ -1398,7 +1450,7 @@ c(srcHow+srcDesc()+'。')+'\n'+
 
     var T=THEMES[S.theme]||THEMES.lake;
     var sheetLines=['「客戶紀錄」：'+d.person+'姓名、'+(S.ind==='house'?'身分、':'')+'生日、手機、Email、職業、狀態、轉介紹來源、最後見面日、下次約訪日、下一步行動、客戶背景、備註。']
-      .concat(d.sheets,['「設定」：提醒用的天數，和下拉選單的選項。']);
+      .concat(d.sheets.map(function(x){return x.replace('原始檔案連結',fileCol())}),['「設定」：提醒用的天數，和下拉選單的選項。']);
     $('p3').textContent=
 c('用 Google Sheets 連接器建一個 Google 試算表，檔名「客戶紀錄」，放在雲端的「AI助理」資料夾。')+'\n\n'+
 '分頁和欄位：\n'+
@@ -1421,7 +1473,7 @@ d.priv.map(privLabel).join('、')+'這些欄位，照 CLAUDE.md 的個資規則�
 c('先拿「'+cl+'」來試做：')+'\n'+
 '0. 開始前，先把 CLAUDE.md 裡的「待問問題」一次問我。用可以點選的選擇題問（每題給我 2～4 個選項直接點），比較特別、選項沒辦法涵蓋的，留一個讓我自己打字的欄位。我回答後把答案寫進 CLAUDE.md。\n'+
 '1. 到客戶資料裡找出這位客戶的所有檔案，讀'+d.read+'。\n'+
-'2. '+d.fill+'，並附上原始檔案的連結。\n'+
+'2. '+d.fill+fileNote()+'。\n'+
 '3. 遇到個資照 CLAUDE.md 的規則處理，規則寫「先問我」的就停下來問我。\n'+
 '4. '+d.care+'\n'+
 '5. 做完把結果列給我核對，看不清楚的地方（手寫、模糊）和這次遇到的新問題，一樣用可以點選的選擇題一次問我。\n\n'+
@@ -1431,13 +1483,13 @@ c('先拿「'+cl+'」來試做：')+'\n'+
     $('batch-hint').innerHTML=all?'AI 會一路做完<br>看不清楚、要問你的地方<br>先在備註標「待確認」<br>最後一次列給你看':'每批做完都看一下它列出的「要你確認」的項目<br>手寫字、模糊的掃描檔最容易讀錯';
     $('p5').textContent=all?
 c('剛剛那位的填法沒問題。照同樣的方式，把剩下的客戶全部整理完，中間不用停下來問我。')+'\n'+
-'・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
+'・原始檔案照試做時的方式處理（複製到雲端或只記位置）\n'+'・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
 '・看不清楚、缺資料、或個資規則寫「先問我」的，先跳過那一格，在備註寫「待確認：原因」，繼續做下一位\n'+
 '・全部做完後，告訴我總共幾位客戶、幾'+d.unit+'，還有哪些檔案沒辦法讀\n'+
 '・最後把所有「待確認」整理成一張清單，一次問我，我回覆後再幫我補上'
 :
 c('剛剛那位的填法沒問題。照同樣的方式，一次做 10 位客戶。')+'\n'+
-'・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
+'・原始檔案照試做時的方式處理（複製到雲端或只記位置）\n'+'・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
 '・每批做完告訴我：做了哪些人、各有幾'+d.unit+'、哪些地方要我確認\n'+
 '・遇到要問我的個資，同一批的一起問，不要一筆一筆停\n'+
 '・我回覆之後再做下一批，直到全部做完\n'+
@@ -1445,7 +1497,7 @@ c('剛剛那位的填法沒問題。照同樣的方式，一次做 10 位客戶�
 
     var on=S.remind==='yes',off=S.remind==='no';
     $('remind-box').hidden=!on;$('remind-off').hidden=!off;
-    var dayTxt=S.freq==='7'?'每天':('每週'+(S.days.length?S.days.join('、'):'一'));
+    var dayTxt=S.days.length===7?'每天':('每週'+(S.days.length?S.days.join('、'):'（還沒勾星期）'));
     var lines=[];
     d.items.forEach(function(k){var it=ITEM[k],st=S.items[k];if(!st.on)return;lines.push('・'+it[0]+(it[1]!==null?' '+st.n+' '+it[1]:''));});
     $('p6').textContent=
@@ -1458,7 +1510,7 @@ c('幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要
 '3. 整理成一則手機推播：先用 ToolSearch 查詢 select:PushNotification 載入工具，再呼叫 PushNotification，status 用 "proactive"，訊息開頭寫「客戶提醒：」。每位客戶一行，附上下一步要做什麼。\n'+
 '4. 推播只寫客戶名字和事項，不放身分證字號、卡號、帳號、地址。\n'+
 '5. 沒有任何要提醒的事，就不用發推播。\n\n'+
-'建好後馬上試跑一次，我會把手機鎖屏，看有沒有收到通知。\n'+
+'建好後，另外設一個 1 分鐘後執行一次的測試推播（只跑一次），訊息寫「客戶提醒：測試成功」。我會先離開 Claude 畫面、把手機鎖屏，等 1～2 分鐘看有沒有收到。\n'+
 '如果排程讀不到試算表，一步一步教我到 claude.ai/code/routines 怎麼設定。\n'+
 '最後把這個排程的名稱、時間和提醒條件寫進 CLAUDE.md。';
 

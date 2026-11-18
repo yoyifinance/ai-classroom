@@ -98,7 +98,15 @@ button{font:inherit;cursor:pointer}
 
 figure{margin:0;display:flex;flex-direction:column;gap:6px}
 .mk{overflow-x:auto;border-radius:10px}
-figure svg{display:block;width:100%;min-width:520px;height:auto;border-radius:10px}
+figure svg{display:block;width:100%;height:auto;border-radius:10px}
+.mk{position:relative;cursor:zoom-in}
+.mk::after{content:"點圖放大";position:absolute;right:8px;bottom:8px;font-size:12px;line-height:1;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;pointer-events:none}
+@media (min-width:700px){.mk{cursor:default}.mk::after{display:none}}
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(10,18,20,.97);display:flex;flex-direction:column}
+.zoom .zbar{display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;color:#fff;font-size:14px}
+.zoom button{background:#fff;color:#13262B;border:0;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+.zoom .zbox{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:8px 16px 24px}
+.zoom .zbox svg{display:block;width:780px;max-width:none;height:auto;border-radius:10px}
 figcaption{font-size:13px;color:var(--muted)}
 .mk-bg{fill:var(--mk-bg)}
 .mk-panel{fill:var(--mk-panel)}
@@ -1360,6 +1368,22 @@ c('幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要
   }
   drawDays();buildIndustry();render();
 
+
+  /* 手機：點操作圖放大，可左右上下滑動 */
+  document.querySelectorAll('.mk').forEach(function(mk){
+    mk.addEventListener('click',function(){
+      if(window.innerWidth>=700)return;
+      var svg=mk.querySelector('svg');if(!svg)return;
+      var z=document.createElement('div');z.className='zoom';z.setAttribute('role','dialog');z.setAttribute('aria-label','放大的操作圖');
+      z.innerHTML='<div class="zbar"><span>可以左右滑動看完整畫面</span><button type="button">關閉</button></div><div class="zbox"></div>';
+      z.querySelector('.zbox').appendChild(svg.cloneNode(true));
+      function close(){z.remove();document.body.style.overflow='';}
+      z.querySelector('button').addEventListener('click',close);
+      z.addEventListener('click',function(e){if(e.target===z)close();});
+      document.body.style.overflow='hidden';document.body.appendChild(z);
+      z.querySelector('button').focus();
+    });
+  });
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var pre=$(b.getAttribute('data-for'));var txt=pre.textContent;

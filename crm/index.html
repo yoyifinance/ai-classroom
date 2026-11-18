@@ -165,6 +165,15 @@ figcaption{line-height:1.7;padding-top:2px}
 .tip{border-left:4px solid var(--seal);padding:12px 16px;line-height:1.9}
 .prompt{margin-top:2px}
 @media (max-width:520px){.wrap{gap:28px}.step{padding:20px 16px}.ms{padding:14px 12px}}
+/* 完成慶祝與可展開的進階步驟 */
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;padding:36px 20px;border-radius:12px;background:var(--teal-soft);border:1px solid var(--line)}
+.done-big{font-family:var(--f-display);font-weight:900;font-size:clamp(26px,6vw,36px);line-height:1.4;color:var(--teal)}
+.more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary::after{content:"";width:12px;height:12px;border-right:3px solid var(--teal);border-bottom:3px solid var(--teal);transform:rotate(45deg);margin:-6px 4px 0;transition:transform .15s ease-out;flex:none}
+.more[open]>summary::after{transform:rotate(-135deg);margin-top:6px}
+.more>summary h2{flex:1}
+.more-body{display:flex;flex-direction:column;gap:16px;margin-top:16px}
 /* 步驟內的「遇到問題？」下拉 */
 .trb{border-radius:8px}
 .trb summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px;color:var(--teal);padding:4px 0}
@@ -688,16 +697,28 @@ figcaption{line-height:1.7;padding-top:2px}
   <div class="num">5</div>
   <div class="body">
     <h2>整批整理<span class="ai">交給 AI</span></h2>
-    <p>一次 10 位<br>每批做完都看一下它列出的「要你確認」的項目<br>手寫字、模糊的掃描檔最容易讀錯</p>
+    <p>試做那位沒問題<br>就可以把其他客戶也整理進去<br>兩種方式選一個</p>
+    <div class="seg" id="batch">
+      <label><input type="radio" name="batch" value="ten" id="batch-ten"><span>一批 10 位，每批我看過（建議）</span></label>
+      <label><input type="radio" name="batch" value="all" id="batch-all"><span>全部一次整理完</span></label>
+    </div>
+    <p class="small muted" id="batch-hint"></p>
     <div class="prompt"><div class="bar"><span>提示詞 5　整批整理</span><button class="copy" data-for="p5">複製</button></div><pre id="p5"></pre></div>
   </div>
+</section>
+
+<!-- 完成 -->
+<section class="done" aria-labelledby="done-h">
+  <p class="done-big" id="done-h">恭喜你<br>已經完成 AI 客戶紀錄 🎉</p>
+  <p>接下來可以給 AI 更多工作<br>想學哪個<br>再點開來看</p>
 </section>
 
 <!-- STEP 6 -->
 <section class="step" id="s6">
   <div class="num">6</div>
   <div class="body">
-    <h2>要不要定期提醒？<span class="ai">交給 AI</span></h2>
+    <details class="more"><summary><h2>客戶定期追蹤提醒<span class="ai">交給 AI</span></h2></summary>
+    <div class="more-body">
     <p>開啟後 AI 會照你設定的時間自己去讀客戶表<br>把該處理的事整理成一則手機推播<br>電腦關機也會照常提醒<br>不需要的話可以跳過<br>之後想開再回來設定</p>
     <div class="seg" id="remind-on">
       <label><input type="radio" name="remind" value="yes" id="remind-yes"><span>要，幫我開啟</span></label>
@@ -735,6 +756,7 @@ figcaption{line-height:1.7;padding-top:2px}
     <div id="remind-off" class="off-note" hidden>
       不開也沒關係<br>想知道該聯絡誰的時候<br>直接問「<span id="ask-off"></span>」就可以了
     </div>
+    </div></details>
   </div>
 </section>
 
@@ -742,7 +764,8 @@ figcaption{line-height:1.7;padding-top:2px}
 <section class="step" id="s7">
   <div class="num">7</div>
   <div class="body">
-    <h2>日常使用：一句話更新<span class="ai">交給 AI</span></h2>
+    <details class="more"><summary><h2>新增、修改客戶紀錄<span class="ai">交給 AI</span></h2></summary>
+    <div class="more-body">
     <p>客戶表建好之後<br>平常最常用的是這幾種<br>填好格子<br>提示詞會自動組好<br>沒填的欄位 AI 會再問你</p>
     <div class="sub">
       <h3 id="f1-h">送新件</h3>
@@ -756,8 +779,9 @@ figcaption{line-height:1.7;padding-top:2px}
     </div>
     <div class="sub">
       <h3>隨口問問</h3>
-      <div class="prompt"><div class="bar"><span>提示詞 7-3　常用問題</span><button class="copy" data-for="p7c">複製</button></div><pre id="p7c"></pre></div>
+      <div class="prompt"><div class="bar"><span>提示詞 7-3　常用問題、改基本資料</span><button class="copy" data-for="p7c">複製</button></div><pre id="p7c"></pre></div>
     </div>
+    </div></details>
   </div>
 </section>
 
@@ -765,8 +789,10 @@ figcaption{line-height:1.7;padding-top:2px}
 <section class="step" id="s8">
   <div class="num">8</div>
   <div class="body">
-    <h2>用手機更新（選做）<span class="ai">交給 AI</span></h2>
+    <details class="more"><summary><h2>用手機打字或講話更新<span class="ai">交給 AI</span></h2></summary>
+    <div class="more-body">
     <p>電腦做完第 0～5 步之後<br>在外面見完客戶<br>也可以直接用手機更新客戶表</p>
+    <p class="tip"><b>懶得打字就用講的</b><br>長按輸入框或按旁邊的麥克風<br>直接說今天跟客戶聊了什麼<br>例如「今天跟王小明見面<br>他想再比較一下<br>下週三再約，幫我更新」<br>AI 會自己整理進客戶表</p>
     <div class="sub">
       <h3>8-1　開一般對話<span class="self">自己按</span></h3>
       <ol class="plain">
@@ -843,6 +869,7 @@ figcaption{line-height:1.7;padding-top:2px}
       <p class="small muted">用的時候在對話框打「ㄎㄏ」<br>鍵盤上面的選字列會出現整段<br>點一下就貼好了</p>
       <p class="small muted">Android 手機可以用輸入法裡的「常用語」或「個人字典」<br>每家手機位置不一樣</p>
     </div>
+    </div></details>
   </div>
 </section>
 
@@ -970,6 +997,7 @@ figcaption{line-height:1.7;padding-top:2px}
   };
 
   var ASK_WEEK='這禮拜該聯絡哪些客戶？每位附上下一步要做什麼。';
+  var ASK_INFO='王小明搬家了，新地址是○○市○○路 1 號，手機也換成 0912-345-678，幫我更新。';
   var ASK_FILL='寫「（待補）」的欄位問我，問完再一次寫進去，寫好後把這一列唸給我確認。';
 
   /* ---------- 四個行業版本 ---------- */
@@ -1120,7 +1148,7 @@ figcaption{line-height:1.7;padding-top:2px}
   };
 
   /* ---------- 狀態 ---------- */
-  var S={ind:'ins',nameMode:'new',name:'',company:'',trade:'',client:'',src:'drive',path:'',theme:'lake',
+  var S={batch:'ten',ind:'ins',nameMode:'new',name:'',company:'',trade:'',client:'',src:'drive',path:'',theme:'lake',
     privacy:{},remind:'',freq:'1',days:['一'],time:'08:30',items:{},forms:{}};
   try{
     var saved=JSON.parse(localStorage.getItem(KEY)||'null');
@@ -1247,6 +1275,7 @@ figcaption{line-height:1.7;padding-top:2px}
   bindRadios('freq','freq',function(){S.days=S.freq==='1'?['一']:S.freq==='2'?['一','五']:DAYS.slice();drawDays();});
   bindRadios('remind','remind');
   bindRadios('src','src');
+  bindRadios('batch','batch');
 
   /* 日常表單 */
   function buildFields(n){
@@ -1378,7 +1407,15 @@ c('先拿「'+cl+'」來試做：')+'\n'+
 '5. 做完把結果列給我核對，看不清楚的地方（手寫、模糊）標出來問我。\n\n'+
 '我確認沒問題之後，請把這次的填法寫進 CLAUDE.md，之後整批都照這個做。';
 
-    $('p5').textContent=
+    var all=S.batch==='all';
+    $('batch-hint').innerHTML=all?'AI 會一路做完<br>看不清楚、要問你的地方<br>先在備註標「待確認」<br>最後一次列給你看':'每批做完都看一下它列出的「要你確認」的項目<br>手寫字、模糊的掃描檔最容易讀錯';
+    $('p5').textContent=all?
+c('剛剛那位的填法沒問題。照同樣的方式，把剩下的客戶全部整理完，中間不用停下來問我。')+'\n'+
+'・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
+'・看不清楚、缺資料、或個資規則寫「先問我」的，先跳過那一格，在備註寫「待確認：原因」，繼續做下一位\n'+
+'・全部做完後，告訴我總共幾位客戶、幾'+d.unit+'，還有哪些檔案沒辦法讀\n'+
+'・最後把所有「待確認」整理成一張清單，一次問我，我回覆後再幫我補上'
+:
 c('剛剛那位的填法沒問題。照同樣的方式，一次做 10 位客戶。')+'\n'+
 '・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
 '・每批做完告訴我：做了哪些人、各有幾'+d.unit+'、哪些地方要我確認\n'+
@@ -1410,7 +1447,7 @@ c('幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要
     var p8=c('先用 Google Drive 連接器讀我雲端硬碟「Claude」資料夾裡的 CLAUDE.md，照裡面的規則做。')+'\n接下來我要更新客戶紀錄：';
     $('p8').textContent=p8;
     $('p8-demo').textContent=p8.split('\n')[0]+'在客戶紀錄新增一位客戶：王小明';
-    $('p7c').textContent=[ASK_WEEK].concat(d.ask).map(c).join('\n\n');
+    $('p7c').textContent=[ASK_WEEK].concat(d.ask,[ASK_INFO]).map(c).join('\n\n');
     save();
   }
   drawDays();buildIndustry();render();

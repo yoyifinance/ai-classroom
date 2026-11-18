@@ -165,6 +165,13 @@ figcaption{line-height:1.7;padding-top:2px}
 .tip{border-left:4px solid var(--seal);padding:12px 16px;line-height:1.9}
 .prompt{margin-top:2px}
 @media (max-width:520px){.wrap{gap:28px}.step{padding:20px 16px}.ms{padding:14px 12px}}
+/* 提示詞預設收起來，只露兩行 */
+.prompt pre{max-height:5.6em;overflow:hidden;position:relative;transition:max-height .2s ease-out}
+.prompt pre::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3em;background:linear-gradient(transparent,var(--code-bg));pointer-events:none}
+.prompt.open pre{max-height:none}
+.prompt.open pre::after{display:none}
+.prompt .bar .acts{display:flex;gap:6px;align-items:center}
+.pmore{background:transparent;color:inherit;border:1px solid currentColor;border-radius:5px;padding:4px 10px;font-size:13px;opacity:.85;white-space:nowrap}
 /* 完成慶祝與可展開的進階步驟 */
 .done{text-align:center;display:flex;flex-direction:column;gap:12px;padding:36px 20px;border-radius:12px;background:var(--teal-soft);border:1px solid var(--line)}
 .done-big{font-family:var(--f-display);font-weight:900;font-size:clamp(26px,6vw,36px);line-height:1.4;color:var(--teal)}
@@ -664,6 +671,12 @@ figcaption{line-height:1.7;padding-top:2px}
     <p class="small muted" id="path-hint"></p>
     <p class="tip"><b>用講的就好</b><br>AI 很聰明<br>不用打「桌面/保險/客戶資料」這種格式<br>直接用跟人聊天的方式告訴它<br>例如「我的客戶資料在桌面的保險資料夾裡面」<br>它就聽得懂<br>之後每一步也是這樣<br>有不懂的直接問它</p>
     <div class="prompt"><div class="bar"><span>提示詞 2　盤點客戶資料</span><button class="copy" data-for="p2">複製</button></div><pre id="p2"></pre></div>
+    <p class="tip"><b>從這一步開始 AI 會自己動手做</b><br>畫面會顯示它正在執行或思考<br>可能要等幾分鐘<br>請耐心等它做完<br>看到它回覆你才算完成</p>
+    <div class="trbs">
+      <details class="trb"><summary>它做完後問了我一堆細節問題？</summary>
+        <div><p>這一步只要先讓它知道大方向<br>細節的問題（某個檔案放哪、某個數字是什麼意思）<br>提示詞已經請它先記下來<br>等第 4 步試做時一次問你</p><p>如果它還是問了<br>可以回它：「這個等第 4 步試做時再問我」</p></div>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -685,6 +698,7 @@ figcaption{line-height:1.7;padding-top:2px}
   <div class="body">
     <h2>先拿一位客戶試做<span class="ai">交給 AI</span></h2>
     <p>先挑一位資料最完整的客戶<br>確認填法沒問題再整批做<br>之後比較不用回頭重改</p>
+    <p>AI 會先把第 2 步記下來的細節問題<br>一次問你<br>再加上試做時遇到的新問題<br>你回答完它會記進 CLAUDE.md<br>之後整批整理就不會再問同樣的事</p>
     <label class="f" for="in-client" style="max-width:280px">試做的客戶名字
       <input type="text" id="in-client" placeholder="例如：王小明">
     </label>
@@ -1375,7 +1389,10 @@ c(srcHow+srcDesc()+'。')+'\n'+
 '・有哪些檔案類型（PDF、照片、Word、試算表…）\n'+
 '・'+d.scan+'\n'+
 '・同一位客戶是不是有好幾份重複或新舊版本的資料\n\n'+
-'最後把資料的位置寫進 CLAUDE.md，再跟我說你打算怎麼整理，等我同意再開始。';
+'這一步只要掌握大方向就好：\n'+
+'・不用把每個檔案都打開來看，每種抽看幾份了解格式就好\n'+
+'・細節的問題（某些檔案放在哪、某個數字或代號是什麼意思、某份資料要不要用）先不要問我，記在 CLAUDE.md 的「待問問題」，等我們試做第一位客戶時再一起問\n\n'+
+'最後把資料的位置寫進 CLAUDE.md，再用幾句話跟我說你打算怎麼整理，等我同意再開始。';
 
     var T=THEMES[S.theme]||THEMES.lake;
     var sheetLines=['「客戶紀錄」：'+d.person+'姓名、'+(S.ind==='house'?'身分、':'')+'生日、手機、Email、職業、狀態、轉介紹來源、最後見面日、下次約訪日、下一步行動、客戶背景、備註。']
@@ -1400,12 +1417,13 @@ d.priv.map(privLabel).join('、')+'這些欄位，照 CLAUDE.md 的個資規則�
     var cl=(S.client||'').trim()||'（客戶名字）';
     $('p4').textContent=
 c('先拿「'+cl+'」來試做：')+'\n'+
+'0. 開始前，先把 CLAUDE.md 裡的「待問問題」一次列出來問我，我回答後把答案寫進 CLAUDE.md。\n'+
 '1. 到客戶資料裡找出這位客戶的所有檔案，讀'+d.read+'。\n'+
 '2. '+d.fill+'，並附上原始檔案的連結。\n'+
 '3. 遇到個資照 CLAUDE.md 的規則處理，規則寫「先問我」的就停下來問我。\n'+
 '4. '+d.care+'\n'+
-'5. 做完把結果列給我核對，看不清楚的地方（手寫、模糊）標出來問我。\n\n'+
-'我確認沒問題之後，請把這次的填法寫進 CLAUDE.md，之後整批都照這個做。';
+'5. 做完把結果列給我核對，看不清楚的地方（手寫、模糊）和這次遇到的新問題，一次列出來問我。\n\n'+
+'我確認沒問題之後，請把這次的填法和我的回答都寫進 CLAUDE.md，之後整批都照這個做，同樣的問題不要再問。';
 
     var all=S.batch==='all';
     $('batch-hint').innerHTML=all?'AI 會一路做完<br>看不清楚、要問你的地方<br>先在備註標「待確認」<br>最後一次列給你看':'每批做完都看一下它列出的「要你確認」的項目<br>手寫字、模糊的掃描檔最容易讀錯';
@@ -1467,6 +1485,16 @@ c('幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要
       document.body.style.overflow='hidden';document.body.appendChild(z);
       z.querySelector('button').focus();
     });
+  });
+  /* 提示詞：看全文／收起 */
+  document.querySelectorAll('.prompt').forEach(function(pr){
+    var cp=pr.querySelector('.copy');if(!cp)return;
+    var wrap=document.createElement('span');wrap.className='acts';
+    var mb=document.createElement('button');mb.type='button';mb.className='pmore';mb.textContent='看全文 ▾';mb.setAttribute('aria-expanded','false');
+    cp.parentNode.insertBefore(wrap,cp);wrap.appendChild(mb);wrap.appendChild(cp);
+    function tog(){var o=pr.classList.toggle('open');mb.textContent=o?'收起 ▴':'看全文 ▾';mb.setAttribute('aria-expanded',o?'true':'false');}
+    mb.addEventListener('click',tog);
+    pr.querySelector('pre').addEventListener('click',function(){if(!pr.classList.contains('open'))tog();});
   });
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){

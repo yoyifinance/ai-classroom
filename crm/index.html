@@ -190,100 +190,183 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
   <div class="num">0</div>
   <div class="body">
     <h2>準備工作</h2>
+    <p class="tip"><b>請用電腦做</b><br>建檔要用 Mac 或 Windows 的 Claude 桌面版<br>手機的 Claude App 不能打開雲端硬碟裡的資料夾<br>所以第 0～5 步請在電腦上完成<br>建好之後提醒會推播到你的手機</p>
     <p class="muted">只有這一步要你自己動手，因為要登入你自己的帳號，AI 不能代替你登入。大約 10 分鐘。</p>
 
     <div class="sub">
       <h3>0-1　裝好三個 App<span class="self">自己按</span></h3>
       <ol class="plain">
-        <li><b>Claude 桌面版</b>：到 <b>claude.ai/download</b> 下載，登入後訂閱 <b>Pro</b> 或 <b>Max</b> 方案（連接雲端和自動提醒需要付費方案）。</li>
+        <li><b>Claude 桌面版</b>：到 <a href="https://claude.ai/download" target="_blank" rel="noopener"><b>claude.ai/download</b></a> 下載，登入後訂閱 <b>Pro</b> 或 <b>Max</b> 方案（連接雲端和自動提醒需要付費方案）。</li>
         <li><b>手機 Claude App</b>：App Store 或 Google Play 搜尋「Claude」，用同一個帳號登入，並允許通知。</li>
-        <li><b>Google 雲端硬碟電腦版</b>：到 <b>google.com/drive/download</b> 下載，用你的 Google 帳號登入。裝好後，Finder（Windows 是檔案總管）左邊會多一個「Google Drive」。</li>
+        <li><b>Google 雲端硬碟電腦版</b>：到 <a href="https://www.google.com/drive/download/" target="_blank" rel="noopener"><b>google.com/drive/download</b></a> 下載，用你的 Google 帳號登入。裝好後，Finder（Windows 是檔案總管）左邊會多一個「Google Drive」。</li>
       </ol>
     </div>
 
     <div class="sub">
       <h3>0-2　讓 Claude 連上你的 Google 雲端<span class="self">自己按</span></h3>
-      <p>點 Claude 視窗<b>左下角的頭像</b> → <b>設定</b>，左邊清單<b>捲到最下面</b>，點「<b>自訂</b>」下面的「<b>外掛程式</b>」，再點上方的「<b>連接器</b>」。</p>
+      <p>點 Claude 視窗<b>右上角的小齒輪</b>，打開「設定」。</p>
       <figure>
         <div class="mk">
-        <svg viewBox="0 0 680 360" role="img" aria-label="設定視窗：自訂底下的外掛程式，上方切到連接器">
-          <rect class="mk-bg" x="0" y="0" width="680" height="360" rx="10"/>
+        <svg viewBox="0 0 680 300" role="img" aria-label="Claude 主畫面，右上角的小齒輪">
+          <rect class="mk-bg" x="0" y="0" width="680" height="300" rx="10"/>
+          <line class="mk-line" x1="128" y1="0" x2="128" y2="300"/>
+          <g class="mk-d" font-size="11"><text x="14" y="22">☰</text><text x="34" y="22">◫</text><text x="54" y="22">‹</text><text x="68" y="22">›</text></g>
+          <rect class="mk-sel" x="8" y="38" width="112" height="22" rx="5"/>
+          <text class="mk-t" x="18" y="53" font-size="12">＋ 新增</text>
+          <g class="mk-t" font-size="12">
+            <text x="18" y="80">⌕ 搜尋</text><text x="18" y="104">▢ 專案</text><text x="18" y="128">▣ 成品</text>
+            <text x="18" y="152">◷ 排程任務</text><text x="18" y="176">✣ 外掛程式</text>
+          </g>
+          <line class="mk-line" x1="0" y1="270" x2="128" y2="270"/>
+          <circle cx="22" cy="285" r="7" fill="#5B6B6F"/>
+          <text class="mk-d" x="36" y="289" font-size="11">你的帳號 ・ Pro</text>
+
+          <g class="mk-d" font-size="13"><text x="618" y="22">－</text><text x="638" y="22">□</text><text x="658" y="22">×</text></g>
+          <circle cx="596" cy="17" r="5.5" fill="none" stroke="#ECECEC" stroke-width="3" stroke-dasharray="2.2 2.1"/>
+          <circle cx="596" cy="17" r="2.2" fill="none" stroke="#ECECEC" stroke-width="1.4"/>
+          <rect class="mk-ring" x="582" y="3" width="28" height="28" rx="8"/>
+          <circle class="mk-dot" cx="574" cy="8" r="11"/><text class="mk-dott" x="570" y="13" font-size="12">1</text>
+
+          <text x="352" y="128" font-size="20" fill="#D97757" font-family="sans-serif">✳</text>
+          <text class="mk-t" x="376" y="128" font-size="19" style="font-family:var(--f-display)">午安</text>
+          <rect class="mk-panel" x="220" y="146" width="330" height="60" rx="10"/>
+          <text class="mk-d" x="234" y="168" font-size="11">輸入 / 以使用 Skills</text>
+          <text class="mk-d" x="232" y="198" font-size="14">＋</text>
+          <text class="mk-d" x="226" y="226" font-size="11">專案或資料夾 ⌄</text>
+        </svg>
+        </div>
+        <figcaption>照實際畫面繪製：① 右上角的小齒輪（在縮小、關閉按鈕的左邊）。</figcaption>
+      </figure>
+
+      <p>左邊清單<b>捲到最下面</b>，點「<b>自訂</b>」下面的「<b>外掛程式</b>」，再點右邊最下面藍色的「<b>外掛程式</b>」連結。</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 400" role="img" aria-label="設定視窗：自訂底下的外掛程式，再點下方藍色的外掛程式連結">
+          <rect class="mk-bg" x="0" y="0" width="680" height="400" rx="10"/>
           <text class="mk-t" x="20" y="30" font-size="15" font-weight="700">設定</text>
+          <text class="mk-d" x="652" y="30" font-size="15">×</text>
           <line class="mk-line" x1="0" y1="44" x2="680" y2="44"/>
-          <line class="mk-line" x1="170" y1="44" x2="170" y2="360"/>
+          <line class="mk-line" x1="170" y1="44" x2="170" y2="400"/>
           <rect class="mk-panel" x="14" y="54" width="144" height="24" rx="6"/>
-          <text class="mk-d" x="26" y="71" font-size="12">🔍 搜尋</text>
+          <text class="mk-d" x="26" y="71" font-size="12">⌕ 搜尋</text>
           <text class="mk-d" x="18" y="98" font-size="11">偏好設定</text>
-          <text class="mk-t" x="30" y="118" font-size="12">一般</text>
-          <text class="mk-t" x="30" y="138" font-size="12">帳戶</text>
-          <text class="mk-t" x="30" y="158" font-size="12">隱私權</text>
-          <text class="mk-t" x="30" y="178" font-size="12">帳單</text>
-          <text class="mk-d" x="30" y="196" font-size="12">⋮</text>
-          <text class="mk-t" x="30" y="214" font-size="12">Claude Code</text>
-          <text class="mk-d" x="18" y="242" font-size="11">此電腦</text>
-          <text class="mk-t" x="30" y="262" font-size="12">系統</text>
-          <text class="mk-t" x="30" y="282" font-size="12">擴充功能</text>
-          <text class="mk-d" x="18" y="310" font-size="11">自訂</text>
-          <rect class="mk-sel" x="14" y="318" width="144" height="28" rx="6"/>
-          <text class="mk-t" x="30" y="337" font-size="13" font-weight="700">外掛程式</text>
-          <rect class="mk-ring" x="9" y="313" width="154" height="38" rx="8"/>
-          <circle class="mk-dot" cx="160" cy="312" r="11"/><text class="mk-dott" x="156" y="317" font-size="12">1</text>
+          <g class="mk-t" font-size="12">
+            <text x="30" y="118">一般</text><text x="30" y="138">帳戶</text><text x="30" y="158">隱私權</text>
+            <text x="30" y="178">帳單</text><text x="30" y="198">使用量</text><text x="30" y="218">功能</text>
+          </g>
+          <text class="mk-d" x="30" y="236" font-size="12">⋮</text>
+          <text class="mk-t" x="30" y="256" font-size="12">Claude Code</text>
+          <text class="mk-d" x="18" y="284" font-size="11">此電腦</text>
+          <g class="mk-t" font-size="12"><text x="30" y="304">系統</text><text x="30" y="324">擴充功能</text></g>
+          <text class="mk-d" x="18" y="352" font-size="11">自訂</text>
+          <rect class="mk-sel" x="14" y="360" width="144" height="28" rx="6"/>
+          <text class="mk-t" x="30" y="379" font-size="13" font-weight="700">外掛程式</text>
+          <rect class="mk-ring" x="9" y="355" width="154" height="38" rx="8"/>
+          <circle class="mk-dot" cx="160" cy="354" r="11"/><text class="mk-dott" x="156" y="359" font-size="12">2</text>
 
           <rect class="mk-panel" x="186" y="56" width="300" height="28" rx="6"/>
-          <text class="mk-d" x="198" y="75" font-size="12">🔍 篩選您的外掛程式</text>
+          <text class="mk-d" x="198" y="75" font-size="12">⌕ 篩選您的外掛程式</text>
           <rect class="mk-panel" x="496" y="56" width="168" height="28" rx="6"/>
-          <text class="mk-t" x="508" y="75" font-size="12">全部</text>
-          <rect class="mk-tab" x="544" y="59" width="60" height="22" rx="5"/>
-          <text class="mk-t" x="551" y="75" font-size="12" font-weight="700">連接器</text>
+          <rect class="mk-sel" x="500" y="59" width="40" height="22" rx="5"/>
+          <text class="mk-t" x="508" y="75" font-size="12" font-weight="700">全部</text>
+          <text class="mk-t" x="551" y="75" font-size="12">連接器</text>
           <text class="mk-t" x="616" y="75" font-size="12">Skills</text>
-          <rect class="mk-ring" x="538" y="52" width="72" height="36" rx="8"/>
-          <circle class="mk-dot" cx="612" cy="50" r="11"/><text class="mk-dott" x="608" y="55" font-size="12">2</text>
 
-          <text class="mk-t" x="188" y="116" font-size="14" font-weight="700">使用中</text>
-          <rect x="190" y="130" width="22" height="16" rx="3" fill="#ECECEC"/>
-          <text class="mk-t" x="224" y="140" font-size="13">Claude in Chrome</text>
-          <text class="mk-d" x="224" y="156" font-size="11">內建・連接器</text>
-          <line class="mk-line" x1="224" y1="170" x2="664" y2="170"/>
-          <text class="mk-d" x="188" y="196" font-size="12">（還沒連過的人，這裡不會有 Google Drive）</text>
+          <rect x="190" y="112" width="22" height="16" rx="3" fill="#ECECEC"/>
+          <text class="mk-t" x="224" y="122" font-size="13">Claude in Chrome</text>
+          <text class="mk-d" x="224" y="138" font-size="11">內建・連接器</text>
+          <line class="mk-line" x1="224" y1="152" x2="664" y2="152"/>
+          <text class="mk-d" x="188" y="184" font-size="12">（還沒新增過的人，這裡只有內建的項目）</text>
 
-          <text class="mk-t" x="188" y="240" font-size="14" font-weight="700">尋找更多外掛程式</text>
-          <text class="mk-d" x="188" y="264" font-size="12">您可以在</text>
-          <text class="mk-link" x="240" y="264" font-size="12" text-decoration="underline">外掛程式</text>
-          <text class="mk-d" x="292" y="264" font-size="12">頁面中尋找並新增更多外掛程式。</text>
-          <rect class="mk-ring" x="234" y="248" width="62" height="24" rx="6"/>
-          <circle class="mk-dot" cx="298" cy="246" r="11"/><text class="mk-dott" x="294" y="251" font-size="12">3</text>
+          <text class="mk-t" x="188" y="314" font-size="14" font-weight="700">尋找更多外掛程式</text>
+          <text class="mk-d" x="188" y="354" font-size="12">您可以在</text>
+          <text class="mk-link" x="240" y="354" font-size="12" text-decoration="underline">外掛程式</text>
+          <text class="mk-d" x="292" y="354" font-size="12">頁面中尋找並新增更多外掛程式。</text>
+          <rect class="mk-ring" x="234" y="338" width="62" height="24" rx="6"/>
+          <circle class="mk-dot" cx="298" cy="336" r="11"/><text class="mk-dott" x="294" y="341" font-size="12">3</text>
         </svg>
         </div>
-        <figcaption>照實際畫面繪製：① 左邊捲到最下面「自訂 → 外掛程式」　② 上方點「連接器」　③ 還沒連過的人，點下方藍色的「外掛程式」去新增。</figcaption>
+        <figcaption>照實際畫面繪製：② 左邊最下面「自訂 → 外掛程式」　③ 右邊最下面藍色的「外掛程式」。</figcaption>
       </figure>
-      <p>進到新增頁面後，在搜尋框打「<b>Google Drive</b>」，按「<b>連接</b>」。跳出 Google 登入畫面時，選<b>放客戶資料的那個 Google 帳號</b>，全部按「允許」。接著用同樣的方式把「<b>Google Sheets</b>」也加進來。</p>
+
+      <p>在上方的搜尋框打「<b>Google Drive</b>」，點搜尋結果裡的 Google Drive。</p>
       <figure>
         <div class="mk">
-        <svg viewBox="0 0 680 190" role="img" aria-label="搜尋 Google Drive 並按連接">
-          <rect class="mk-bg" x="0" y="0" width="680" height="190" rx="10"/>
-          <rect class="mk-panel" x="20" y="20" width="640" height="34" rx="7"/>
-          <text class="mk-t" x="36" y="42" font-size="13">🔍 Google Drive</text>
-          <path d="M40 92 l10 -17 h14 l10 17 l-7 12 h-20z" fill="#1FA463"/>
-          <path d="M50 75 h14 l10 17 h-14z" fill="#FFC107"/>
-          <path d="M40 92 h34 l-7 12 h-20z" fill="#4285F4"/>
-          <text class="mk-t" x="92" y="88" font-size="15" font-weight="700">Google Drive</text>
-          <text class="mk-d" x="92" y="108" font-size="12">連接器・由 Google 提供</text>
-          <rect class="mk-btn" x="566" y="78" width="80" height="30" rx="6"/>
-          <text class="mk-btnt" x="590" y="98" font-size="13">連接</text>
-          <rect class="mk-ring" x="559" y="71" width="94" height="44" rx="8"/>
-          <circle class="mk-dot" cx="654" cy="70" r="11"/><text class="mk-dott" x="650" y="75" font-size="12">4</text>
-          <line class="mk-line" x1="20" y1="128" x2="660" y2="128"/>
-          <rect x="44" y="142" width="22" height="28" rx="3" fill="#1FA463"/>
-          <rect x="49" y="152" width="12" height="10" rx="1" fill="#fff"/>
-          <text class="mk-t" x="92" y="156" font-size="15" font-weight="700">Google Sheets</text>
-          <text class="mk-d" x="92" y="174" font-size="12">連接器・由 Google 提供</text>
-          <rect class="mk-btn" x="566" y="144" width="80" height="30" rx="6"/>
-          <text class="mk-btnt" x="590" y="164" font-size="13">連接</text>
+        <svg viewBox="0 0 680 270" role="img" aria-label="外掛程式頁面：搜尋 Google Drive 並點進去">
+          <rect class="mk-bg" x="0" y="0" width="680" height="270" rx="10"/>
+          <text class="mk-t" x="24" y="38" font-size="19" style="font-family:var(--f-display)">外掛程式</text>
+          <text class="mk-d" x="650" y="36" font-size="14">⋯</text>
+          <rect class="mk-panel" x="24" y="56" width="420" height="30" rx="7"/>
+          <text class="mk-t" x="38" y="76" font-size="13">⌕ Google Drive</text>
+          <rect class="mk-ring" x="18" y="50" width="432" height="42" rx="9"/>
+          <circle class="mk-dot" cx="452" cy="50" r="11"/><text class="mk-dott" x="448" y="55" font-size="12">4</text>
+          <rect class="mk-panel" x="468" y="56" width="150" height="30" rx="7"/>
+          <rect class="mk-sel" x="472" y="60" width="40" height="22" rx="5"/>
+          <text class="mk-t" x="480" y="76" font-size="12" font-weight="700">全部</text>
+          <text class="mk-t" x="522" y="76" font-size="12">連接器</text>
+          <text class="mk-t" x="578" y="76" font-size="12">Skills</text>
+          <rect class="mk-btn" x="626" y="58" width="40" height="26" rx="6"/>
+          <text class="mk-btnt" x="634" y="75" font-size="11">新增</text>
+
+          <path d="M40 140 l10 -17 h14 l10 17 l-7 12 h-20z" fill="#1FA463"/>
+          <path d="M50 123 h14 l10 17 h-14z" fill="#FFC107"/>
+          <path d="M40 140 h34 l-7 12 h-20z" fill="#4285F4"/>
+          <text class="mk-t" x="92" y="134" font-size="15" font-weight="700">Google Drive</text>
+          <text class="mk-d" x="92" y="154" font-size="12">連接器・由 Google 提供</text>
+          <rect class="mk-ring" x="28" y="110" width="300" height="56" rx="9"/>
+          <circle class="mk-dot" cx="330" cy="110" r="11"/><text class="mk-dott" x="326" y="115" font-size="12">5</text>
+          <line class="mk-line" x1="24" y1="184" x2="656" y2="184"/>
+          <rect x="44" y="200" width="22" height="28" rx="3" fill="#1FA463"/>
+          <rect x="49" y="210" width="12" height="10" rx="1" fill="#fff"/>
+          <text class="mk-t" x="92" y="214" font-size="15" font-weight="700">Google Sheets</text>
+          <text class="mk-d" x="92" y="234" font-size="12">連接器・由 Google 提供</text>
         </svg>
         </div>
-        <figcaption>示意圖：④ 搜尋後按「連接」，Google Sheets 也一樣。按鈕的位置可能隨版本略有不同。</figcaption>
+        <figcaption>照實際畫面繪製：④ 搜尋框打「Google Drive」　⑤ 點搜尋結果。</figcaption>
       </figure>
-      <p class="small muted">連好之後，回到「連接器」那一頁，「使用中」就會出現 Google Drive 和 Google Sheets。</p>
+
+      <p>按右上角的「<b>新增</b>」。跳出 Google 登入畫面時，選<b>放客戶資料的那個 Google 帳號</b>，全部按「允許」。接著回到上一頁，用同樣的方式把「<b>Google Sheets</b>」也加進來。</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 290" role="img" aria-label="Google Drive 介紹頁，右上角的新增按鈕">
+          <rect class="mk-bg" x="0" y="0" width="680" height="290" rx="10"/>
+          <text class="mk-link" x="20" y="28" font-size="12">← 外掛程式</text>
+          <rect class="mk-panel" x="20" y="44" width="44" height="44" rx="10"/>
+          <path d="M28 72 l8 -14 h12 l8 14 l-6 10 h-16z" fill="#1FA463"/>
+          <path d="M36 58 h12 l8 14 h-12z" fill="#FFC107"/>
+          <path d="M28 72 h28 l-6 10 h-16z" fill="#4285F4"/>
+          <text class="mk-t" x="78" y="66" font-size="20" font-weight="700">Google Drive</text>
+          <text class="mk-d" x="78" y="86" font-size="11">由 Google 提供 ・ Search, read, and upload files instantly</text>
+          <rect class="mk-btn" x="560" y="50" width="60" height="28" rx="6"/>
+          <text class="mk-btnt" x="575" y="69" font-size="13">新增</text>
+          <rect class="mk-ring" x="553" y="43" width="74" height="42" rx="8"/>
+          <circle class="mk-dot" cx="629" cy="42" r="11"/><text class="mk-dott" x="625" y="47" font-size="12">6</text>
+          <text class="mk-d" x="638" y="69" font-size="13">⇪</text>
+          <text class="mk-d" x="656" y="68" font-size="13">⋯</text>
+          <text class="mk-t" x="22" y="118" font-size="12" font-weight="700">總覽</text>
+          <text class="mk-d" x="64" y="118" font-size="12">權限</text>
+          <line x1="20" y1="126" x2="50" y2="126" stroke="#ECECEC" stroke-width="2"/>
+          <line class="mk-line" x1="20" y1="127" x2="660" y2="127"/>
+          <rect class="mk-sel" x="22" y="144" width="400" height="7" rx="3"/>
+          <rect class="mk-sel" x="22" y="158" width="380" height="7" rx="3"/>
+          <rect class="mk-sel" x="22" y="172" width="250" height="7" rx="3"/>
+          <text class="mk-d" x="22" y="206" font-size="11">連接器</text>
+          <rect class="mk-panel" x="20" y="216" width="402" height="40" rx="8"/>
+          <text class="mk-d" x="32" y="240" font-size="11">›</text>
+          <path d="M46 241 l5 -9 h8 l5 9 l-4 6 h-10z" fill="#1FA463"/>
+          <path d="M51 232 h8 l5 9 h-8z" fill="#FFC107"/>
+          <path d="M46 241 h18 l-4 6 h-10z" fill="#4285F4"/>
+          <text class="mk-t" x="74" y="241" font-size="12">Google Drive</text>
+          <text class="mk-d" x="460" y="150" font-size="11">開發者</text>
+          <text class="mk-t" x="460" y="168" font-size="12">Google</text>
+          <text class="mk-d" x="460" y="198" font-size="11">授權</text>
+          <text class="mk-t" x="460" y="216" font-size="12">需要登入</text>
+        </svg>
+        </div>
+        <figcaption>示意圖：⑥ 按右上角的「新增」，再登入 Google、按「允許」。按鈕文字可能隨版本不同（例如「連接」）。</figcaption>
+      </figure>
+      <p class="small muted">連好之後，按鈕會變成「✓ 已新增」，下面的 Google Drive 會顯示「已連接」。</p>
+      <p class="tip"><b>捷徑：</b>Claude 主畫面左邊的選單也有「外掛程式」，點它可以直接跳到第 ④ 步。</p>
     </div>
 
     <div class="sub">
@@ -478,8 +561,15 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     <details>
       <summary>找不到「連接器」在哪裡？</summary>
       <div>
-        <p>不要用螢幕最上方選單列的「Claude → 設定」（<kbd>⌘</kbd> + <kbd>,</kbd>），那裡沒有連接器。要點 Claude 視窗<b>左下角的頭像</b> → 設定，左邊清單<b>捲到最下面</b>「自訂 → 外掛程式」，再點上方的「連接器」。</p>
-        <p>還是找不到，在設定左上角的搜尋框打「連接器」，或用瀏覽器打開 <b>claude.ai/settings/connectors</b>。</p>
+        <p>不要用螢幕最上方選單列的「Claude → 設定」（<kbd>⌘</kbd> + <kbd>,</kbd>），那裡沒有連接器。要點 Claude 視窗<b>右上角的小齒輪</b>，左邊清單<b>捲到最下面</b>「自訂 → 外掛程式」，再點上方的「連接器」。或直接點主畫面左邊選單的「外掛程式」。</p>
+        <p>還是找不到，在設定左上角的搜尋框打「連接器」，或用瀏覽器打開 <a href="https://claude.ai/settings/connectors" target="_blank" rel="noopener"><b>claude.ai/settings/connectors</b></a>。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>可以只用手機做嗎？</summary>
+      <div>
+        <p>建檔不行。手機的 Claude App 不能打開雲端硬碟裡的資料夾，第 0～5 步要用電腦上的 Claude 桌面版（Mac 或 Windows）。建好之後，定期提醒會推播到手機。</p>
       </div>
     </details>
 
@@ -566,7 +656,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
   var IND={
     ins:{
       label:'保險業務',role:'保險業務',co:'例如：○○保險經紀人',
-      lead:'不用會電腦，也不用自己打表格。照著做，你的 AI 助理會把散在各處的要保書、主附約、掃描檔，整理成一份好看的客戶紀錄試算表；之後送新件、換信用卡，講一句話它就幫你記好。',
+      lead:['要保書、主附約、掃描檔','之後送新件、換信用卡'],
       get2:['一句話新增保單','送新件、改資料不用自己打'],
       rec:'保單紀錄',
       privIntro:'要保書裡有很多敏感資料',
@@ -604,7 +694,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     },
     house:{
       label:'房仲',role:'房仲業務',co:'例如：○○房屋',
-      lead:'不用會電腦，也不用自己打表格。照著做，你的 AI 助理會把散在各處的委託書、斡旋書、帶看紀錄，整理成一份好看的客戶紀錄試算表；之後接新委託、帶看回報，講一句話它就幫你記好。',
+      lead:['委託書、斡旋書、帶看紀錄','之後接新委託、帶看回報'],
       get2:['一句話新增委託','接委託、帶看回報不用自己打'],
       rec:'委託和帶看紀錄',
       privIntro:'委託書、斡旋書裡有很多敏感資料',
@@ -642,7 +732,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     },
     car:{
       label:'汽車業務',role:'汽車業務',co:'例如：○○汽車',
-      lead:'不用會電腦，也不用自己打表格。照著做，你的 AI 助理會把散在各處的訂購單、合約、報價單，整理成一份好看的客戶紀錄試算表；之後接新訂單、交車，講一句話它就幫你記好。',
+      lead:['訂購單、合約、報價單','之後接新訂單、交車'],
       get2:['一句話新增訂單','接新訂單、交車不用自己打'],
       rec:'訂單和車輛紀錄',
       privIntro:'訂購單、貸款資料裡有很多敏感資料',
@@ -676,7 +766,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
     },
     other:{
       label:'其他行業',role:'業務',co:'例如：○○有限公司',
-      lead:'不用會電腦，也不用自己打表格。照著做，你的 AI 助理會把散在各處的名片、訂單、對話紀錄，整理成一份好看的客戶紀錄試算表；之後成交、見完客戶，講一句話它就幫你記好。',
+      lead:['名片、訂單、對話紀錄','之後成交、見完客戶'],
       get2:['一句話記下往來','成交、見面不用自己打'],
       rec:'往來紀錄',
       privIntro:'客戶資料裡常有敏感資料',
@@ -855,7 +945,7 @@ footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);paddin
 
   function buildIndustry(){
     var d=I();
-    $('lead').textContent=d.lead;
+    $('lead').innerHTML=['不用會電腦','也不用自己打表格','照著做','你的 AI 助理會把散在各處的',d.lead[0],'整理成一份好看的客戶紀錄試算表',d.lead[1],'講一句話它就幫你記好'].join('<br>');
     $('get2').innerHTML='<b>'+d.get2[0]+'</b>'+d.get2[1];
     $('in-company').placeholder=d.co;
     $('trade-label').hidden=S.ind!=='other';

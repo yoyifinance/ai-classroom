@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap">
+<script>(function(){try{var t=localStorage.getItem("yoyi-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <style>
 /* 版面：一張「客戶資料表」的教學版。左側編號欄＝步驟，紅色印章色只用在重點與按鈕。 */
 :root{
@@ -189,15 +190,30 @@ figcaption{line-height:1.7;padding-top:2px}
 .trb[open] summary::after{transform:rotate(-135deg);margin-top:4px}
 .trb>div{margin-top:6px;padding:10px 14px;border-left:3px solid var(--teal);background:var(--teal-soft);border-radius:0 6px 6px 0;font-size:15px;line-height:1.85;display:flex;flex-direction:column;gap:8px}
 .trbs{display:flex;flex-direction:column;gap:2px}
+/* 置頂橫條：LOGO＋YOYI AI 教學、深淺色切換、回到首頁 */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:8px max(16px,env(safe-area-inset-left,0px));
+  padding-top:calc(8px + env(safe-area-inset-top,0px));
+  background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tb-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;letter-spacing:.06em;font-size:15px;min-width:0;white-space:nowrap}
+.tb-brand img{height:30px;width:auto;flex:none}
+.tb-acts{display:flex;gap:8px;align-items:center;flex:none}
+.tb-btn{font:inherit;font-size:13px;font-weight:700;line-height:1;display:inline-flex;align-items:center;gap:4px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap}
+.tb-home{border-color:var(--teal);color:var(--teal)}
+.tb-btn:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+@media (max-width:360px){.tb-brand span{display:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<header class="topbar">
+  <a class="tb-brand" href="../"><img src="../images/logo-mark.svg" alt="YOYI" width="31" height="30"><span>YOYI AI 教學</span></a>
+  <div class="tb-acts"><button type="button" class="tb-btn" id="theme-btn" aria-label="切換深淺色">深色模式</button><a class="tb-btn tb-home" href="../">回到首頁</a></div>
+</header>
 
 
 <div class="wrap">
 
-<a class="back" href="../">← 回 YoYi AI 教室</a>
 <header class="hero">
   <div class="eyebrow">YoYi AI 教室 ・ 課程 01 ・ 懶人版</div>
   <h1>AI 客戶紀錄建檔說明書</h1>
@@ -1561,5 +1577,14 @@ c('幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要
 })();
 </script>
 
+<script>
+(function(){
+  var b=document.getElementById('theme-btn'),r=document.documentElement;
+  function cur(){var t=r.getAttribute('data-theme');if(t)return t;return window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function label(){b.textContent=cur()==='dark'?'淺色模式':'深色模式';}
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('yoyi-theme',n);}catch(e){}label();});
+  label();
+})();
+</script>
 </body>
 </html>

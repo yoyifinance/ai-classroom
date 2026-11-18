@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="懶人版教學：讓 AI 助理把要保書、主附約整理成客戶紀錄試算表，送新件、換信用卡一句話更新。">
+<title>AI 客戶紀錄建檔說明書｜YoYi AI 教室</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap">
+<style>
+/* 版面：一張「要保書」的教學版。左側編號欄＝步驟，紅色印章色只用在重點與按鈕。 */
+:root{
+  --bg:#F3F5F4; --paper:#FFFFFF; --ink:#13262B; --muted:#5B6B6F; --line:#D6DDDB;
+  --teal:#1F5C63; --teal-soft:#E3EEEE; --seal:#B8402B; --seal-soft:#F7E6E1;
+  --code-bg:#14272C; --code-fg:#E8F0EE; --ok:#2E7D4F;
+  --mk-bg:#1E1E1E; --mk-panel:#262626; --mk-text:#ECECEC; --mk-dim:#9A9A9A; --mk-sel:#3A3A3A; --mk-line:#353535;
+  --f-display:"Noto Serif TC","Songti TC",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1719; --paper:#152225; --ink:#E6EEEC; --muted:#9AAAAD; --line:#2A3B3F;
+  --teal:#7FC4C9; --teal-soft:#1B3236; --seal:#E8775F; --seal-soft:#3A221D;
+  --code-bg:#0A1214; --code-fg:#DDE8E6; --ok:#6FCB94; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1719; --paper:#152225; --ink:#E6EEEC; --muted:#9AAAAD; --line:#2A3B3F;
+  --teal:#7FC4C9; --teal-soft:#1B3236; --seal:#E8775F; --seal-soft:#3A221D;
+  --code-bg:#0A1214; --code-fg:#DDE8E6; --ok:#6FCB94; color-scheme:dark}
+
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+.back{font-size:14px;text-decoration:none}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+.wrap{max-width:860px;margin:0 auto;padding-block:40px 80px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:clamp(30px,6vw,46px);font-weight:900}
+h2{font-size:clamp(22px,4vw,28px);font-weight:900}
+h3{font-size:18px;font-weight:700;font-family:var(--f-body)}
+p{margin:0}
+a{color:var(--teal)}
+.eyebrow{font-size:13px;letter-spacing:.12em;color:var(--seal);font-weight:700}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+.hero{display:flex;flex-direction:column;gap:14px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.hero .lead{font-size:18px;max-width:62ch}
+.gets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+.gets div{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-size:15px}
+.gets b{display:block;font-size:16px}
+@media (max-width:640px){.gets{grid-template-columns:1fr}}
+.howto{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px}
+.howto span b{color:var(--seal)}
+
+.setup{background:var(--teal-soft);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.fields.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.fields,.fields.two{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:500;min-width:0}
+input[type=text],input[type=time],input[type=number],select{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);width:100%;min-width:0}
+input[type=number]{width:72px}
+input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+.step{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 20px}
+.num{font-family:var(--f-display);font-weight:900;font-size:34px;color:var(--seal);line-height:1}
+.body{display:flex;flex-direction:column;gap:14px;min-width:0}
+@media (max-width:520px){.step{grid-template-columns:1fr;gap:6px;padding:18px 16px}.num{font-size:28px}}
+.sub{display:flex;flex-direction:column;gap:10px;padding-top:14px;border-top:1px dashed var(--line)}
+ol.plain,ul.plain{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:4px}
+.tip{background:var(--seal-soft);border-radius:6px;padding:10px 14px;font-size:15px}
+.tip b{color:var(--seal)}
+.self{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--seal);border:1px solid var(--seal);border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:2px}
+.ai{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--teal);border:1px solid var(--teal);border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:2px}
+
+.prompt{border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.prompt .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--ink);color:var(--bg);padding:6px 8px 6px 14px;font-size:13px}
+.prompt pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px 16px;font-family:var(--f-body);font-size:15px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+button{font:inherit;cursor:pointer}
+.copy{background:var(--seal);color:#fff;border:0;border-radius:5px;padding:5px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.copy.done{background:var(--ok)}
+
+.choice-table{display:flex;flex-direction:column;gap:8px}
+.crow{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;align-items:center}
+@media (max-width:520px){.crow{grid-template-columns:1fr;gap:4px}}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:inline-block;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;background:var(--paper);cursor:pointer}
+.seg input:checked+span{background:var(--teal);border-color:var(--teal);color:var(--paper);font-weight:700}
+.seg input:focus-visible+span{outline:2px solid var(--seal);outline-offset:2px}
+.check{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15px}
+.check input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal)}
+
+figure{margin:0;display:flex;flex-direction:column;gap:6px}
+.mk{overflow-x:auto;border-radius:10px}
+figure svg{display:block;width:100%;min-width:520px;height:auto;border-radius:10px}
+figcaption{font-size:13px;color:var(--muted)}
+.mk-bg{fill:var(--mk-bg)}
+.mk-panel{fill:var(--mk-panel)}
+.mk-t{fill:var(--mk-text);font-family:var(--f-body)}
+.mk-d{fill:var(--mk-dim);font-family:var(--f-body)}
+.mk-sel{fill:var(--mk-sel)}
+.mk-line{stroke:var(--mk-line);stroke-width:1}
+.mk-ring{fill:none;stroke:#E8775F;stroke-width:3}
+.mk-dot{fill:#E8775F}
+.mk-dott{fill:#1E1E1E;font-family:var(--f-body);font-weight:700}
+.mk-tab{fill:none;stroke:#5B8DEF;stroke-width:1.5}
+.mk-link{fill:#7AA7F5;font-family:var(--f-body)}
+.mk-btn{fill:#ECECEC}
+.mk-btnt{fill:#1E1E1E;font-family:var(--f-body);font-weight:700}
+
+/* sheet theme preview */
+.themes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.themes{grid-template-columns:1fr}}
+.theme{position:relative;display:block;cursor:pointer}
+.theme input{position:absolute;opacity:0;pointer-events:none}
+.theme .card{border:2px solid var(--line);border-radius:8px;padding:10px;background:var(--paper);display:flex;flex-direction:column;gap:8px}
+.theme input:checked+.card{border-color:var(--seal)}
+.theme input:focus-visible+.card{outline:2px solid var(--seal);outline-offset:2px}
+.theme b{font-size:15px}
+.mini{width:100%;border-collapse:collapse;font-size:12px;line-height:1.4;background:#fff;color:#2B2B2B;border-radius:4px;overflow:hidden}
+.mini th{color:#fff;font-weight:700;text-align:left;padding:5px 6px}
+.mini td{padding:5px 6px;border-bottom:1px solid var(--bd)}
+.mini tr:nth-child(even) td{background:var(--band)}
+.chip{display:inline-block;padding:0 6px;border-radius:999px;font-size:11px}
+.c-ok{background:#E6F4EA;color:#1E6B3A}.c-go{background:#E8F0FE;color:#1A4D8F}.c-wait{background:#F1F3F4;color:#5F6368}
+
+.phone{max-width:340px;background:var(--ink);border-radius:22px;padding:18px 12px;display:flex;flex-direction:column;gap:8px}
+.notif{background:var(--paper);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.55}
+.notif .h{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.off-note{background:var(--teal-soft);border-radius:6px;padding:12px 14px}
+
+.faq{display:flex;flex-direction:column;gap:10px}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:0 16px}
+.faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style-position:outside}
+.faq details[open] summary{border-bottom:1px dashed var(--line);margin-bottom:10px}
+.faq details>div{padding-bottom:14px;display:flex;flex-direction:column;gap:8px}
+kbd{font-family:var(--f-body);font-size:13px;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--bg)}
+footer{font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<a class="back" href="../">← 回 YoYi AI 教室</a>
+<header class="hero">
+  <div class="eyebrow">YoYi AI 教室 ・ 課程 01 ・ 懶人版</div>
+  <h1>AI 客戶紀錄建檔說明書</h1>
+  <p class="lead">不用會電腦，也不用自己打表格。照著做，你的 AI 助理會把散在各處的要保書、主附約、掃描檔，整理成一份好看的客戶紀錄試算表；之後送新件、換信用卡，講一句話它就幫你記好。</p>
+  <div class="gets">
+    <div><b>一份雲端客戶表</b>電腦、手機都能看、都能改</div>
+    <div><b>一句話新增保單</b>送新件、改資料不用自己打</div>
+    <div><b>提醒（可選）</b>該聯絡誰、誰生日，推播到手機</div>
+  </div>
+  <div class="howto">
+    <span><b>怎麼用這一頁：</b>填格子 → 按「複製」→ 貼給你的 AI 助理 → 按 Enter</span>
+    <span><span class="self">自己按</span> 要你親手操作</span>
+    <span><span class="ai">交給 AI</span> 貼提示詞就好</span>
+  </div>
+</header>
+
+<section class="setup" aria-labelledby="setup-h">
+  <h2 id="setup-h" style="font-size:20px">先填這兩格，下面的提示詞會自動換成你的版本</h2>
+  <div class="fields two">
+    <label class="f" for="in-name">幫你的 AI 助理取名字
+      <input type="text" id="in-name" placeholder="例如：小秘書">
+    </label>
+    <label class="f" for="in-company">你的公司
+      <input type="text" id="in-company" placeholder="例如：大誠保險經紀人">
+    </label>
+  </div>
+  <p class="small muted">名字沒填的話，提示詞會先用「小助理」。你填的內容只存在你自己的瀏覽器，不會傳出去。</p>
+</section>
+
+<!-- STEP 0 -->
+<section class="step" id="s0">
+  <div class="num">0</div>
+  <div class="body">
+    <h2>準備工作</h2>
+    <p class="muted">只有這一步要你自己動手，因為要登入你自己的帳號，AI 不能代替你登入。大約 10 分鐘。</p>
+
+    <div class="sub">
+      <h3>0-1　裝好三個 App<span class="self">自己按</span></h3>
+      <ol class="plain">
+        <li><b>Claude 桌面版</b>：到 <b>claude.ai/download</b> 下載，登入後訂閱 <b>Pro</b> 或 <b>Max</b> 方案（連接雲端和自動提醒需要付費方案）。</li>
+        <li><b>手機 Claude App</b>：App Store 或 Google Play 搜尋「Claude」，用同一個帳號登入，並允許通知。</li>
+        <li><b>Google 雲端硬碟電腦版</b>：到 <b>google.com/drive/download</b> 下載，用你的 Google 帳號登入。裝好後，Finder（Windows 是檔案總管）左邊會多一個「Google Drive」。</li>
+      </ol>
+    </div>
+
+    <div class="sub">
+      <h3>0-2　讓 Claude 連上你的 Google 雲端<span class="self">自己按</span></h3>
+      <p>點 Claude 視窗<b>左下角的頭像</b> → <b>設定</b>，左邊清單<b>捲到最下面</b>，點「<b>自訂</b>」下面的「<b>外掛程式</b>」，再點上方的「<b>連接器</b>」。</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 360" role="img" aria-label="設定視窗：自訂底下的外掛程式，上方切到連接器">
+          <rect class="mk-bg" x="0" y="0" width="680" height="360" rx="10"/>
+          <text class="mk-t" x="20" y="30" font-size="15" font-weight="700">設定</text>
+          <line class="mk-line" x1="0" y1="44" x2="680" y2="44"/>
+          <line class="mk-line" x1="170" y1="44" x2="170" y2="360"/>
+          <rect class="mk-panel" x="14" y="54" width="144" height="24" rx="6"/>
+          <text class="mk-d" x="26" y="71" font-size="12">🔍 搜尋</text>
+          <text class="mk-d" x="18" y="98" font-size="11">偏好設定</text>
+          <text class="mk-t" x="30" y="118" font-size="12">一般</text>
+          <text class="mk-t" x="30" y="138" font-size="12">帳戶</text>
+          <text class="mk-t" x="30" y="158" font-size="12">隱私權</text>
+          <text class="mk-t" x="30" y="178" font-size="12">帳單</text>
+          <text class="mk-d" x="30" y="196" font-size="12">⋮</text>
+          <text class="mk-t" x="30" y="214" font-size="12">Claude Code</text>
+          <text class="mk-d" x="18" y="242" font-size="11">此電腦</text>
+          <text class="mk-t" x="30" y="262" font-size="12">系統</text>
+          <text class="mk-t" x="30" y="282" font-size="12">擴充功能</text>
+          <text class="mk-d" x="18" y="310" font-size="11">自訂</text>
+          <rect class="mk-sel" x="14" y="318" width="144" height="28" rx="6"/>
+          <text class="mk-t" x="30" y="337" font-size="13" font-weight="700">外掛程式</text>
+          <rect class="mk-ring" x="9" y="313" width="154" height="38" rx="8"/>
+          <circle class="mk-dot" cx="160" cy="312" r="11"/><text class="mk-dott" x="156" y="317" font-size="12">1</text>
+
+          <rect class="mk-panel" x="186" y="56" width="300" height="28" rx="6"/>
+          <text class="mk-d" x="198" y="75" font-size="12">🔍 篩選您的外掛程式</text>
+          <rect class="mk-panel" x="496" y="56" width="168" height="28" rx="6"/>
+          <text class="mk-t" x="508" y="75" font-size="12">全部</text>
+          <rect class="mk-tab" x="544" y="59" width="60" height="22" rx="5"/>
+          <text class="mk-t" x="551" y="75" font-size="12" font-weight="700">連接器</text>
+          <text class="mk-t" x="616" y="75" font-size="12">Skills</text>
+          <rect class="mk-ring" x="538" y="52" width="72" height="36" rx="8"/>
+          <circle class="mk-dot" cx="612" cy="50" r="11"/><text class="mk-dott" x="608" y="55" font-size="12">2</text>
+
+          <text class="mk-t" x="188" y="116" font-size="14" font-weight="700">使用中</text>
+          <rect x="190" y="130" width="22" height="16" rx="3" fill="#ECECEC"/>
+          <text class="mk-t" x="224" y="140" font-size="13">Claude in Chrome</text>
+          <text class="mk-d" x="224" y="156" font-size="11">內建・連接器</text>
+          <line class="mk-line" x1="224" y1="170" x2="664" y2="170"/>
+          <text class="mk-d" x="188" y="196" font-size="12">（還沒連過的人，這裡不會有 Google Drive）</text>
+
+          <text class="mk-t" x="188" y="240" font-size="14" font-weight="700">尋找更多外掛程式</text>
+          <text class="mk-d" x="188" y="264" font-size="12">您可以在</text>
+          <text class="mk-link" x="240" y="264" font-size="12" text-decoration="underline">外掛程式</text>
+          <text class="mk-d" x="292" y="264" font-size="12">頁面中尋找並新增更多外掛程式。</text>
+          <rect class="mk-ring" x="234" y="248" width="62" height="24" rx="6"/>
+          <circle class="mk-dot" cx="298" cy="246" r="11"/><text class="mk-dott" x="294" y="251" font-size="12">3</text>
+        </svg>
+        </div>
+        <figcaption>照實際畫面繪製：① 左邊捲到最下面「自訂 → 外掛程式」　② 上方點「連接器」　③ 還沒連過的人，點下方藍色的「外掛程式」去新增。</figcaption>
+      </figure>
+      <p>進到新增頁面後，在搜尋框打「<b>Google Drive</b>」，按「<b>連接</b>」。跳出 Google 登入畫面時，選<b>放客戶資料的那個 Google 帳號</b>，全部按「允許」。接著用同樣的方式把「<b>Google Sheets</b>」也加進來。</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 190" role="img" aria-label="搜尋 Google Drive 並按連接">
+          <rect class="mk-bg" x="0" y="0" width="680" height="190" rx="10"/>
+          <rect class="mk-panel" x="20" y="20" width="640" height="34" rx="7"/>
+          <text class="mk-t" x="36" y="42" font-size="13">🔍 Google Drive</text>
+          <path d="M40 92 l10 -17 h14 l10 17 l-7 12 h-20z" fill="#1FA463"/>
+          <path d="M50 75 h14 l10 17 h-14z" fill="#FFC107"/>
+          <path d="M40 92 h34 l-7 12 h-20z" fill="#4285F4"/>
+          <text class="mk-t" x="92" y="88" font-size="15" font-weight="700">Google Drive</text>
+          <text class="mk-d" x="92" y="108" font-size="12">連接器・由 Google 提供</text>
+          <rect class="mk-btn" x="566" y="78" width="80" height="30" rx="6"/>
+          <text class="mk-btnt" x="590" y="98" font-size="13">連接</text>
+          <rect class="mk-ring" x="559" y="71" width="94" height="44" rx="8"/>
+          <circle class="mk-dot" cx="654" cy="70" r="11"/><text class="mk-dott" x="650" y="75" font-size="12">4</text>
+          <line class="mk-line" x1="20" y1="128" x2="660" y2="128"/>
+          <rect x="44" y="142" width="22" height="28" rx="3" fill="#1FA463"/>
+          <rect x="49" y="152" width="12" height="10" rx="1" fill="#fff"/>
+          <text class="mk-t" x="92" y="156" font-size="15" font-weight="700">Google Sheets</text>
+          <text class="mk-d" x="92" y="174" font-size="12">連接器・由 Google 提供</text>
+          <rect class="mk-btn" x="566" y="144" width="80" height="30" rx="6"/>
+          <text class="mk-btnt" x="590" y="164" font-size="13">連接</text>
+        </svg>
+        </div>
+        <figcaption>示意圖：④ 搜尋後按「連接」，Google Sheets 也一樣。按鈕的位置可能隨版本略有不同。</figcaption>
+      </figure>
+      <p class="small muted">連好之後，回到「連接器」那一頁，「使用中」就會出現 Google Drive 和 Google Sheets。</p>
+    </div>
+
+    <div class="sub">
+      <h3>0-3　打開 Code 分頁，選雲端硬碟<span class="self">自己按</span></h3>
+      <p>在 Claude 上方切到 <b>Code</b>，選擇資料夾時點左邊的 <b>Google Drive → 我的雲端硬碟</b>。不用自己開新資料夾，下一步 AI 會幫你建好。</p>
+      <figure>
+        <div class="mk">
+        <svg viewBox="0 0 680 230" role="img" aria-label="在 Code 分頁選擇我的雲端硬碟">
+          <rect class="mk-bg" x="0" y="0" width="680" height="230" rx="10"/>
+          <rect class="mk-panel" x="250" y="12" width="180" height="30" rx="7"/>
+          <text class="mk-d" x="264" y="32" font-size="13">Chat</text>
+          <text class="mk-d" x="310" y="32" font-size="13">Cowork</text>
+          <rect class="mk-sel" x="368" y="16" width="56" height="22" rx="5"/>
+          <text class="mk-t" x="380" y="32" font-size="13" font-weight="700">Code</text>
+          <rect class="mk-ring" x="362" y="9" width="68" height="36" rx="8"/>
+          <circle class="mk-dot" cx="434" cy="10" r="11"/><text class="mk-dott" x="430" y="15" font-size="12">1</text>
+          <rect class="mk-panel" x="120" y="66" width="440" height="146" rx="10"/>
+          <text class="mk-d" x="136" y="90" font-size="12">選擇資料夾</text>
+          <line class="mk-line" x1="230" y1="100" x2="230" y2="200"/>
+          <text class="mk-d" x="136" y="118" font-size="12">桌面</text>
+          <text class="mk-d" x="136" y="140" font-size="12">文件</text>
+          <text class="mk-t" x="136" y="166" font-size="12" font-weight="700">Google Drive</text>
+          <rect class="mk-sel" x="240" y="108" width="200" height="26" rx="5"/>
+          <text class="mk-t" x="252" y="126" font-size="13" font-weight="700">📁 我的雲端硬碟</text>
+          <text class="mk-d" x="252" y="152" font-size="12">📁 與我共用</text>
+          <rect class="mk-ring" x="234" y="102" width="212" height="38" rx="8"/>
+          <circle class="mk-dot" cx="448" cy="102" r="11"/><text class="mk-dott" x="444" y="107" font-size="12">2</text>
+          <rect class="mk-btn" x="468" y="174" width="80" height="28" rx="6"/>
+          <text class="mk-btnt" x="494" y="193" font-size="13">打開</text>
+        </svg>
+        </div>
+        <figcaption>示意圖：① 切到 Code　② 選「Google Drive → 我的雲端硬碟」→ 打開。</figcaption>
+      </figure>
+      <p class="tip"><b>從這裡開始</b>，之後每一步都只要複製提示詞，貼到 Code 分頁的輸入框，按 Enter。</p>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 1 -->
+<section class="step" id="s1">
+  <div class="num">1</div>
+  <div class="body">
+    <h2>取名字、定規則<span class="ai">交給 AI</span></h2>
+    <p>AI 會自己在你的雲端開一個「AI助理」資料夾，再把你定的規則存起來，換電腦、用手機都會照規則做。</p>
+    <p>要保書裡有很多敏感資料，下面每一項由你決定要不要記錄。選「<b>每次先問我</b>」，AI 讀到這類資料時會先停下來問你。</p>
+    <div class="choice-table" id="privacy">
+      <div class="crow"><b>身分證字號</b><div class="seg" data-key="id"></div></div>
+      <div class="crow"><b>地址</b><div class="seg" data-key="addr"></div></div>
+      <div class="crow"><b>信用卡號</b><div class="seg" data-key="card"></div></div>
+      <div class="crow"><b>銀行帳號</b><div class="seg" data-key="bank"></div></div>
+      <div class="crow"><b>健康告知</b><div class="seg" data-key="health"></div></div>
+    </div>
+    <p class="tip"><b>建議：</b>信用卡選「只記末四碼」。保險公司本來就有完整卡號，你的表格只要分得出這張保單用哪張卡扣款就夠了；整組卡號存在試算表，萬一分享錯人就全部外洩。要查完整卡號時，再打開原本的掃描檔就好。</p>
+    <div class="prompt"><div class="bar"><span>提示詞 1　取名字與規則</span><button class="copy" data-for="p1">複製</button></div><pre id="p1"></pre></div>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step" id="s2">
+  <div class="num">2</div>
+  <div class="body">
+    <h2>告訴它客戶資料放在哪<span class="ai">交給 AI</span></h2>
+    <p>這一步只讀不改，讓 AI 先看看你的檔案是怎麼放的。</p>
+    <div class="crow" style="grid-template-columns:150px minmax(0,1fr)"><b>客戶資料放在</b>
+      <div class="seg" id="src">
+        <label><input type="radio" name="src" value="drive" id="src-drive"><span>Google 雲端硬碟</span></label>
+        <label><input type="radio" name="src" value="local" id="src-local"><span>電腦裡的資料夾</span></label>
+        <label><input type="radio" name="src" value="unknown" id="src-unknown"><span>不確定在哪</span></label>
+      </div>
+    </div>
+    <label class="f" for="in-path" id="path-label">資料夾名稱或路徑
+      <input type="text" id="in-path" placeholder="例如：客戶資料">
+    </label>
+    <p class="small muted" id="path-hint"></p>
+    <div class="prompt"><div class="bar"><span>提示詞 2　盤點客戶資料</span><button class="copy" data-for="p2">複製</button></div><pre id="p2"></pre></div>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step" id="s3">
+  <div class="num">3</div>
+  <div class="body">
+    <h2>建立好看的客戶紀錄表<span class="ai">交給 AI</span></h2>
+    <p>用 Google 試算表，手機、電腦都能改，自動提醒也讀得到。挑一個你喜歡的配色，AI 會照這個風格排好版：標題列固定、狀態用柔和的色塊標示、日期和金額格式統一，看久了眼睛也不累。</p>
+    <div class="themes" id="themes"></div>
+    <div class="prompt"><div class="bar"><span>提示詞 3　建立試算表</span><button class="copy" data-for="p3">複製</button></div><pre id="p3"></pre></div>
+    <p class="small muted">要 Excel 檔時，在試算表點「檔案 → 下載 → Microsoft Excel」就好。</p>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step" id="s4">
+  <div class="num">4</div>
+  <div class="body">
+    <h2>先拿一位客戶試做<span class="ai">交給 AI</span></h2>
+    <p>先挑一位資料最完整的客戶，確認填法沒問題再整批做，之後比較不用回頭重改。</p>
+    <label class="f" for="in-client" style="max-width:280px">試做的客戶名字
+      <input type="text" id="in-client" placeholder="例如：王小明">
+    </label>
+    <div class="prompt"><div class="bar"><span>提示詞 4　試做一位</span><button class="copy" data-for="p4">複製</button></div><pre id="p4"></pre></div>
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step" id="s5">
+  <div class="num">5</div>
+  <div class="body">
+    <h2>整批整理<span class="ai">交給 AI</span></h2>
+    <p>一次 10 位，每批做完都看一下它列出的「要你確認」的項目。手寫字、模糊的掃描檔最容易讀錯。</p>
+    <div class="prompt"><div class="bar"><span>提示詞 5　整批整理</span><button class="copy" data-for="p5">複製</button></div><pre id="p5"></pre></div>
+  </div>
+</section>
+
+<!-- STEP 6 -->
+<section class="step" id="s6">
+  <div class="num">6</div>
+  <div class="body">
+    <h2>要不要定期提醒？<span class="ai">交給 AI</span></h2>
+    <p>開啟後，AI 會照你設定的時間自己去讀客戶表，把該處理的事整理成一則手機推播。電腦關機也會照常提醒。不需要的話可以跳過，之後想開再回來設定。</p>
+    <div class="seg" id="remind-on">
+      <label><input type="radio" name="remind" value="yes" id="remind-yes"><span>要，幫我開啟</span></label>
+      <label><input type="radio" name="remind" value="no" id="remind-no"><span>先不用</span></label>
+    </div>
+
+    <div id="remind-box" class="body" hidden>
+      <div class="sub">
+        <h3>通知長這樣</h3>
+        <div class="phone" aria-label="推播範例">
+          <div class="notif"><div class="h"><span>Claude</span><span>週一 08:30</span></div>
+            <b>客戶提醒：本週 4 件</b><br>
+            ・王小明 35 天沒見面，該聯絡了<br>
+            ・陳美玲 週三約訪（下一步：送建議書）<br>
+            ・林大同 11/21 生日<br>
+            ・張家豪 醫療險 12/01 週年
+          </div>
+        </div>
+        <p class="small muted">範例，名字是虛構的。推播只寫名字和事項，不會放身分證字號、卡號、地址。</p>
+      </div>
+      <div class="sub">
+        <h3>多久通知一次？</h3>
+        <div class="seg" id="freq">
+          <label><input type="radio" name="freq" value="1" id="freq-1"><span>每週一次</span></label>
+          <label><input type="radio" name="freq" value="2" id="freq-2"><span>每週兩次</span></label>
+          <label><input type="radio" name="freq" value="7" id="freq-7"><span>每天</span></label>
+        </div>
+        <div class="check" id="days"></div>
+        <label class="f" for="in-time" style="max-width:160px">幾點通知（台灣時間）
+          <input type="time" id="in-time" value="08:30">
+        </label>
+      </div>
+      <div class="sub">
+        <h3>要提醒哪些事？</h3>
+        <div class="choice-table" id="items"></div>
+      </div>
+      <div class="prompt"><div class="bar"><span>提示詞 6　開啟提醒</span><button class="copy" data-for="p6">複製</button></div><pre id="p6"></pre></div>
+      <p class="tip"><b>測試時把手機鎖屏。</b>手機開著 Claude App 的時候，推播不會跳出來。雲端排程有時會晚幾分鐘才跑。</p>
+    </div>
+    <div id="remind-off" class="off-note" hidden>
+      不開也沒關係。想知道該聯絡誰的時候，直接問「<span class="nm">小助理</span>，這禮拜該聯絡哪些客戶？」就可以了。
+    </div>
+  </div>
+</section>
+
+<!-- STEP 7 -->
+<section class="step" id="s7">
+  <div class="num">7</div>
+  <div class="body">
+    <h2>日常使用：一句話更新<span class="ai">交給 AI</span></h2>
+    <p>客戶表建好之後，平常最常用的是這幾種。填好格子，提示詞會自動組好；沒填的欄位，AI 會再問你。</p>
+    <div class="sub">
+      <h3>送新件</h3>
+      <div class="fields" id="nb-fields"></div>
+      <div class="prompt"><div class="bar"><span>提示詞 7-1　送新件</span><button class="copy" data-for="p7a">複製</button></div><pre id="p7a"></pre></div>
+    </div>
+    <div class="sub">
+      <h3>更換扣款信用卡</h3>
+      <div class="fields" id="cc-fields"></div>
+      <div class="prompt"><div class="bar"><span>提示詞 7-2　換信用卡</span><button class="copy" data-for="p7b">複製</button></div><pre id="p7b"></pre></div>
+    </div>
+    <div class="sub">
+      <h3>隨口問問</h3>
+      <div class="prompt"><div class="bar"><span>提示詞 7-3　常用問題</span><button class="copy" data-for="p7c">複製</button></div><pre id="p7c"></pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="step" id="faq">
+  <div class="num">?</div>
+  <div class="body faq">
+    <h2>常見問題</h2>
+
+    <details>
+      <summary>Claude 的畫面是英文的，怎麼改成中文？</summary>
+      <div>
+        <p>Claude 桌面版沒有自己的語言選項，它會跟著<b>電腦的系統語言</b>。台灣買的電腦大多已經是中文，打開就是中文介面；如果是英文，照下面改：</p>
+        <p><b>Mac：</b>左上角 蘋果選單 →「系統設定」→「一般」→「語言與地區」，在「偏好的語言」按「＋」加入「繁體中文」並拖到最上面。只想改 Claude，就在同一頁下方「應用程式」按「＋」，選 Claude，語言選繁體中文。</p>
+        <p><b>Windows：</b>開始 →「設定」→「時間與語言」→「語言與地區」，把「Windows 顯示語言」改成「中文（台灣）」，登出再登入。</p>
+        <p>改完把 Claude 完全關掉（Mac 按 <kbd>⌘</kbd> + <kbd>Q</kbd>）再打開。網頁版的 claude.ai 則是跟著瀏覽器的語言。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>找不到「連接器」在哪裡？</summary>
+      <div>
+        <p>不要用螢幕最上方選單列的「Claude → 設定」（<kbd>⌘</kbd> + <kbd>,</kbd>），那裡沒有連接器。要點 Claude 視窗<b>左下角的頭像</b> → 設定，左邊清單<b>捲到最下面</b>「自訂 → 外掛程式」，再點上方的「連接器」。</p>
+        <p>還是找不到，在設定左上角的搜尋框打「連接器」，或用瀏覽器打開 <b>claude.ai/settings/connectors</b>。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>連接 Google Drive 可以叫 AI 幫我按嗎？</summary>
+      <div>
+        <p>不行。連接時要登入你的 Google 帳號、按「允許」，這是授權你自己的帳號，只能本人操作，AI 不能代替你登入。好消息是只要做一次，之後都不用再按。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>客戶資料不在 Google 雲端，在電腦裡可以嗎？</summary>
+      <div>
+        <p>可以。第 2 步選「電腦裡的資料夾」，把資料夾<b>直接拖進 Claude 的輸入框</b>，路徑就會自己跑出來，複製貼到格子裡就好。不知道在哪，就選「不確定在哪」，讓 AI 幫你找。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>設定好提醒，手機卻沒收到通知？</summary>
+      <div>
+        <ol class="plain">
+          <li>手機的 Claude App 要登入同一個帳號，並在手機設定裡允許 Claude 發通知。</li>
+          <li>測試時把手機鎖屏。開著 Claude App 時推播不會跳出來。</li>
+          <li>雲端排程可能晚幾分鐘才跑，等 5～10 分鐘再看。</li>
+          <li>還是沒有，就問你的 AI 助理：「提醒排程有沒有跑？為什麼我沒收到？」</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>它整理錯了怎麼辦？</summary>
+      <div>
+        <p>直接跟它說哪裡錯，再加一句「<b>請寫進 CLAUDE.md，以後照這樣做</b>」。CLAUDE.md 是它的規則本，記下來之後就不會再犯同樣的錯。原始檔案不會被改到，試算表隨時可以重整。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <span>YoYi AI 教室 ・ 課程 01　AI 客戶紀錄建檔說明書</span>
+  <span>用 AI 整理客戶資料前，請先了解公司對個資的規定。操作畫面依 Claude 2026 年 11 月版本繪製，改版後位置可能略有不同。</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='yoyi-crm-guide-v2';
+  var S={name:'',company:'',client:'',src:'drive',path:'',theme:'lake',
+    privacy:{id:'ask',addr:'ask',card:'last4',bank:'ask',health:'ask'},
+    remind:'',freq:'1',days:['一'],time:'08:30',
+    items:{met:{on:true,n:30},follow:{on:true,n:14},appt:{on:true},bday:{on:true,n:7},anniv:{on:true,n:30},pc:{on:false,n:30}},
+    nb:{},cc:{}};
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved){for(var k in saved)S[k]=saved[k];}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+  var $=function(id){return document.getElementById(id)};
+  var nm=function(){return (S.name||'').trim()||'小助理'};
+  var co=function(){return (S.company||'').trim()||'（我的公司）'};
+
+  var PRIV={
+    id:{label:'身分證字號',opts:[['ask','每次先問我'],['yes','要記錄'],['no','不記錄']]},
+    addr:{label:'地址',opts:[['ask','每次先問我'],['yes','要記錄'],['no','不記錄']]},
+    card:{label:'信用卡號',opts:[['last4','只記末四碼（建議）'],['ask','每次先問我'],['yes','記完整卡號']]},
+    bank:{label:'銀行帳號',opts:[['ask','每次先問我'],['last4','只記末四碼'],['yes','要記錄'],['no','不記錄']]},
+    health:{label:'健康告知',opts:[['ask','每次先問我'],['yes','要記錄'],['no','不記錄']]}
+  };
+  function privText(k){
+    var v=S.privacy[k],L=PRIV[k].label;
+    if(v==='ask')return L+'：讀到時先停下來問我這次要不要記錄，由我決定';
+    if(v==='yes')return L+'：要記錄';
+    if(v==='last4')return L+'：只記'+(k==='card'?'發卡銀行和':'銀行名稱和')+'末四碼，完整號碼不要抄';
+    return L+'：不要記錄，讀到就跳過';
+  }
+  function radioGroup(container,name,opts,cur,onPick){
+    opts.forEach(function(o){
+      var lb=document.createElement('label');
+      lb.innerHTML='<input type="radio" name="'+name+'" id="'+name+'-'+o[0]+'" value="'+o[0]+'"><span>'+o[1]+'</span>';
+      var inp=lb.querySelector('input');if(cur===o[0])inp.checked=true;
+      inp.addEventListener('change',function(){onPick(o[0]);});
+      container.appendChild(lb);
+    });
+  }
+  document.querySelectorAll('#privacy .seg').forEach(function(seg){
+    var k=seg.getAttribute('data-key');
+    radioGroup(seg,'pv-'+k,PRIV[k].opts,S.privacy[k],function(v){S.privacy[k]=v;render();});
+  });
+
+  // sheet themes
+  var THEMES={
+    lake:{name:'湖水綠',desc:'沉穩、像銀行報表',head:'#2F5D62',band:'#F4F8F7',bd:'#DDE6E4'},
+    mist:{name:'霧藍',desc:'乾淨、專業感',head:'#3B5770',band:'#F4F6F9',bd:'#DCE2EA'},
+    warm:{name:'暖灰',desc:'柔和、不冰冷',head:'#5A524C',band:'#F8F6F3',bd:'#E6E1DB'}
+  };
+  var tbox=$('themes');
+  Object.keys(THEMES).forEach(function(k){
+    var t=THEMES[k];
+    var lb=document.createElement('label');lb.className='theme';
+    lb.innerHTML='<input type="radio" name="theme" id="theme-'+k+'" value="'+k+'"'+(S.theme===k?' checked':'')+'>'+
+      '<div class="card"><b>'+t.name+'</b><span class="small muted">'+t.desc+'</span>'+
+      '<table class="mini" style="--band:'+t.band+';--bd:'+t.bd+'"><thead><tr style="background:'+t.head+'"><th>姓名</th><th>狀態</th><th>下次約訪</th></tr></thead>'+
+      '<tbody><tr><td>王小明</td><td><span class="chip c-ok">已成交</span></td><td>2026/11/25</td></tr>'+
+      '<tr><td>陳美玲</td><td><span class="chip c-go">追蹤中</span></td><td>2026/12/02</td></tr>'+
+      '<tr><td>林大同</td><td><span class="chip c-wait">暫緩</span></td><td>2027/02/22</td></tr></tbody></table></div>';
+    lb.querySelector('input').addEventListener('change',function(){S.theme=k;render();});
+    tbox.appendChild(lb);
+  });
+
+  // reminder items
+  var ITEMS=[['met','成交客戶超過','天沒見面'],['follow','追蹤中的客戶超過','天沒聯絡'],['appt','下次約訪日（前一天和當天）',null],
+    ['bday','客戶生日，提前','天'],['anniv','壽險保單週年，提前','天'],['pc','產險保單到期，提前','天']];
+  var itemsBox=$('items');
+  ITEMS.forEach(function(it){
+    var k=it[0],st=S.items[k];
+    var row=document.createElement('div');row.className='check';
+    var html='<input type="checkbox" id="it-'+k+'"'+(st.on?' checked':'')+'><label for="it-'+k+'">'+it[1]+'</label>';
+    if(it[2]!==null)html+='<input type="number" min="1" max="365" id="itn-'+k+'" value="'+st.n+'" aria-label="'+it[1]+'天數"><span>'+it[2]+'</span>';
+    row.innerHTML=html;itemsBox.appendChild(row);
+    row.querySelector('#it-'+k).addEventListener('change',function(e){S.items[k].on=e.target.checked;render();});
+    var n=row.querySelector('#itn-'+k);
+    if(n)n.addEventListener('input',function(e){S.items[k].n=parseInt(e.target.value,10)||st.n;render();});
+  });
+  var DAYS=['一','二','三','四','五','六','日'];
+  var daysBox=$('days');
+  function drawDays(){
+    daysBox.innerHTML='<span>星期：</span>';
+    DAYS.forEach(function(d,i){
+      var w=document.createElement('label');w.className='check';w.style.gap='4px';
+      w.innerHTML='<input type="checkbox" id="day-'+i+'"'+(S.days.indexOf(d)>=0?' checked':'')+(S.freq==='7'?' disabled':'')+'>'+d;
+      w.querySelector('input').addEventListener('change',function(e){
+        if(e.target.checked){if(S.days.indexOf(d)<0)S.days.push(d);}else{S.days=S.days.filter(function(x){return x!==d});}
+        S.days.sort(function(a,b){return DAYS.indexOf(a)-DAYS.indexOf(b)});render();});
+      daysBox.appendChild(w);
+    });
+  }
+  function bindRadios(name,key,after){
+    document.querySelectorAll('input[name='+name+']').forEach(function(r){
+      if(r.value===S[key])r.checked=true;
+      r.addEventListener('change',function(){S[key]=r.value;if(after)after();render();});
+    });
+  }
+  bindRadios('freq','freq',function(){S.days=S.freq==='1'?['一']:S.freq==='2'?['一','五']:DAYS.slice();drawDays();});
+  bindRadios('remind','remind');
+  bindRadios('src','src');
+
+  var NB=[['co','保險公司','例如：富邦人壽'],['prod','商品名稱','例如：XX 終身醫療'],['main','主約',''],['rider','附約','可寫多個'],
+    ['ph','要保人',''],['ins','被保人',''],['ben','受益人','例如：法定繼承人'],['mode','繳別','年繳／半年繳／季繳／月繳'],
+    ['prem','每期保費',''],['eff','生效日','例如：2026/11/20'],['pay','付款方式','信用卡／轉帳／自繳'],['bankn','發卡銀行',''],['cardno','卡號','']];
+  var CC=[['who','客戶（要保人）',''],['pol','哪張保單','商品名稱或保單號碼'],['nbank','新卡發卡銀行',''],['ncard','新卡卡號',''],['date','變更日期','例如：2026/11/18']];
+  function drawFields(boxId,defs,obj){
+    var box=$(boxId);
+    defs.forEach(function(d){
+      var id=boxId+'-'+d[0];
+      var lb=document.createElement('label');lb.className='f';lb.setAttribute('for',id);
+      lb.innerHTML=d[1]+'<input type="text" id="'+id+'" placeholder="'+(d[2]||'')+'">';
+      var inp=lb.querySelector('input');inp.value=obj[d[0]]||'';
+      inp.addEventListener('input',function(){obj[d[0]]=inp.value;render();});
+      box.appendChild(lb);
+    });
+  }
+  drawFields('nb-fields',NB,S.nb);drawFields('cc-fields',CC,S.cc);
+  ['name','company','client','path'].forEach(function(k){
+    var el=$('in-'+k);el.value=S[k]||'';
+    el.addEventListener('input',function(){S[k]=el.value;render();});
+  });
+  $('in-time').value=S.time;
+  $('in-time').addEventListener('input',function(e){S.time=e.target.value||'08:30';render();});
+
+  function cardWord(){return S.privacy.card==='last4'?'末四碼':'卡號';}
+  function v(o,k){var x=(o[k]||'').trim();return x||'（待補）';}
+
+  function srcDesc(){
+    var p=(S.path||'').trim();
+    if(S.src==='drive')return '我的 Google 雲端硬碟裡的「'+(p||'（資料夾名稱）')+'」資料夾';
+    if(S.src==='local')return '我電腦裡的「'+(p||'（資料夾路徑）')+'」';
+    return '我的客戶資料'+(p?'（我記得名稱有「'+p+'」）':'');
+  }
+
+  function render(){
+    var N=nm();
+    document.querySelectorAll('.nm').forEach(function(e){e.textContent=N});
+    var cn=$('nb-fields-cardno');if(cn)cn.placeholder=S.privacy.card==='last4'?'只填末四碼，例如 1234':'例如 1234';
+    var nc=$('cc-fields-ncard');if(nc)nc.placeholder=S.privacy.card==='last4'?'只填末四碼，例如 5678':'例如 5678';
+
+    // step 2 labels
+    var pl=$('path-label'),pin=$('in-path'),ph=$('path-hint');
+    if(S.src==='drive'){pl.firstChild.textContent='雲端硬碟裡的資料夾名稱';pin.placeholder='例如：客戶資料';
+      ph.textContent='寫資料夾名稱就好。在子資料夾裡的話，可以寫「保險／客戶資料」。';}
+    else if(S.src==='local'){pl.firstChild.textContent='電腦裡的資料夾路徑';pin.placeholder='例如：/Users/你的名字/Desktop/客戶資料';
+      ph.textContent='懶人做法：把資料夾直接拖進 Claude 的輸入框，路徑會自己跑出來，複製貼過來就好。';}
+    else{pl.firstChild.textContent='記得的資料夾名稱（可以空白）';pin.placeholder='例如：客戶、保單';
+      ph.textContent='AI 會在雲端硬碟和電腦裡幫你找，找到後先問你是不是這個。';}
+
+    $('p1').textContent=
+'從現在起，你的名字叫「'+N+'」。我是'+co()+'的保險業務，接下來要請你幫我把客戶資料整理成一份 Google 試算表，之後也會請你幫我新增和修改保單紀錄。\n\n'+
+'請你先做這幾件事：\n'+
+'1. 在目前這個資料夾（我的雲端硬碟）裡，建立一個資料夾叫「AI助理」，之後你做的檔案都放在這裡。\n'+
+'2. 在目前這個資料夾建立 CLAUDE.md，把下面的規則寫進去（它在 Google 雲端硬碟，換電腦也讀得到），不要只存在電腦本機。\n'+
+'3. 確認你能用 Google Drive 和 Google Sheets 連接器；如果連不上，一步一步教我怎麼連。\n\n'+
+'規則：\n'+
+'・你的名字叫「'+N+'」，一律用繁體中文（台灣用語）回覆，講話白話、簡短\n'+
+'・客戶資料只用來回答我，不要傳到其他服務，也不要放進客戶表以外的檔案\n'+
+'・讀不清楚或缺少的資料直接問我，不要自己猜\n'+
+'・不要修改、移動或刪除我原本的客戶檔案\n'+
+'・個資記錄規則：\n'+
+['id','addr','card','bank','health'].map(function(k){return '   - '+privText(k)}).join('\n')+'\n'+
+'・以後我說「記住」或糾正你的地方，也都寫進 CLAUDE.md\n\n'+
+'做完後用三行告訴我你做了什麼。';
+
+    var srcHow=S.src==='drive'?'用 Google Drive 連接器（或直接讀目前這個雲端硬碟資料夾）去看'
+      :S.src==='local'?'去看':'幫我找';
+    $('p2').textContent=
+N+'，'+srcHow+srcDesc()+'。\n'+
+(S.src==='unknown'?'先在我的 Google 雲端硬碟和電腦的桌面、文件、下載裡找名稱像「客戶」「保單」「要保書」的資料夾，找到後先問我是不是這個，確認了再往下看。\n':'')+
+'這一步只要看，不要修改、移動或刪除任何檔案。\n\n'+
+'請告訴我：\n'+
+'・大概有幾位客戶、資料夾是怎麼分的（一人一個資料夾？依保險公司分？）\n'+
+'・有哪些檔案類型（PDF、照片、Word、試算表…）\n'+
+'・要保書是文字檔還是掃描圖片，手寫的多不多\n'+
+'・同一位客戶是不是有好幾份重複或新舊版本的資料\n\n'+
+'最後把資料的位置寫進 CLAUDE.md，再跟我說你打算怎麼整理，等我同意再開始。';
+
+    var T=THEMES[S.theme]||THEMES.lake;
+    $('p3').textContent=
+N+'，用 Google Sheets 連接器建一個 Google 試算表，檔名「客戶紀錄」，放在雲端的「AI助理」資料夾。\n\n'+
+'分頁和欄位：\n'+
+'1.「客戶紀錄」：一位客戶（要保人）一列。姓名、生日、手機、Email、職業、狀態、轉介紹來源、最後見面日、下次約訪日、下一步行動、客戶背景、備註。\n'+
+'2.「保單明細」：一張保單一列。要保人、被保人、受益人、保險公司、商品名稱、主約、附約、保單號碼、繳別、每期保費、年繳化保費、生效日、保單狀態、付款方式、發卡銀行、卡號、變更紀錄、原始檔案連結。\n'+
+'3.「設定」：提醒用的天數，和下拉選單的選項。\n'+
+'身分證字號、地址、卡號、銀行帳號、健康告知這些欄位，照 CLAUDE.md 的個資規則決定要不要開。\n\n'+
+'排版要清楚、好看、不刺眼（配色：'+T.name+'）：\n'+
+'・標題列：底色 '+T.head+'、白色粗體字、置中，列高 32，第 1 列和第 1 欄（姓名）凍結\n'+
+'・資料列：白底和 '+T.band+' 交錯，框線只用淺色 '+T.bd+' 細線，不要黑色粗框\n'+
+'・字型統一，字級 11；文字靠左、金額靠右，長文字（背景、備註）自動換行\n'+
+'・欄寬依內容調整，背景、備註欄寬一點\n'+
+'・日期一律存成真正的日期，格式 yyyy/mm/dd；金額用千分位 #,##0\n'+
+'・「狀態」用下拉選單，柔和色塊：已成交 淺綠底 #E6F4EA 深綠字 #1E6B3A、追蹤中 淺藍底 #E8F0FE 深藍字 #1A4D8F、暫緩 淺灰底 #F1F3F4 灰字 #5F6368\n'+
+'・下次約訪日在 7 天內的那格標淡橘底 #FEF3E0\n'+
+'・三個分頁的頁籤也用 '+T.head+' 系列的顏色，加上篩選\n'+
+'・不要用大紅、螢光色，整體要像銀行對帳單一樣乾淨\n\n'+
+'建好之後把試算表連結給我，我看過排版再開始放資料。';
+
+    var cl=(S.client||'').trim()||'（客戶名字）';
+    $('p4').textContent=
+N+'，先拿「'+cl+'」來試做：\n'+
+'1. 到客戶資料裡找出這位客戶的所有檔案，讀要保書、主附約、保單資料。\n'+
+'2. 把客戶填進「客戶紀錄」，每張保單填進「保單明細」，並附上原始檔案的連結。\n'+
+'3. 遇到個資照 CLAUDE.md 的規則處理，規則寫「先問我」的就停下來問我。\n'+
+'4. 要保人和被保人不同時，生日、手機要對到正確的人，不要填錯列。\n'+
+'5. 做完把結果列給我核對，看不清楚的地方（手寫、模糊）標出來問我。\n\n'+
+'我確認沒問題之後，請把這次的填法寫進 CLAUDE.md，之後整批都照這個做。';
+
+    $('p5').textContent=
+N+'，剛剛那位的填法沒問題。照同樣的方式，一次做 10 位客戶。\n'+
+'・同一位客戶有好幾份資料時，以最新的為準，舊的在備註寫一句就好\n'+
+'・每批做完告訴我：做了哪些人、各有幾張保單、哪些地方要我確認\n'+
+'・遇到要問我的個資，同一批的一起問，不要一筆一筆停\n'+
+'・我回覆之後再做下一批，直到全部做完\n'+
+'・全部做完後，告訴我總共幾位客戶、幾張保單，還有哪些檔案沒辦法讀';
+
+    var on=S.remind==='yes',off=S.remind==='no';
+    $('remind-box').hidden=!on;$('remind-off').hidden=!off;
+    var dayTxt=S.freq==='7'?'每天':('每週'+(S.days.length?S.days.join('、'):'一'));
+    var lines=[];
+    ITEMS.forEach(function(it){var st=S.items[it[0]];if(!st.on)return;lines.push('・'+it[1]+(it[2]!==null?' '+st.n+' '+it[2]:''));});
+    $('p6').textContent=
+N+'，幫我建一個 Claude 雲端排程（電腦關機也要能跑），排程要掛上 Google Drive 連接器。\n\n'+
+'時間：'+dayTxt+' 台灣時間 '+S.time+'。\n\n'+
+'每次執行時：\n'+
+'1. 用 Google Drive 連接器讀「AI助理」資料夾裡的「客戶紀錄」試算表（匯出成 xlsx 時要指定 exportMimeType）。\n'+
+'2. 用原始日期自己計算，不要依賴試算表公式的結果。找出從今天到下一次執行前會遇到的：\n'+
+(lines.length?lines.join('\n'):'・（還沒勾選提醒項目）')+'\n'+
+'3. 整理成一則手機推播：先用 ToolSearch 查詢 select:PushNotification 載入工具，再呼叫 PushNotification，status 用 "proactive"，訊息開頭寫「客戶提醒：」。每位客戶一行，附上下一步要做什麼。\n'+
+'4. 推播只寫客戶名字和事項，不放身分證字號、卡號、地址。\n'+
+'5. 沒有任何要提醒的事，就不用發推播。\n\n'+
+'建好後馬上試跑一次，我會把手機鎖屏，看有沒有收到通知。\n'+
+'如果排程讀不到試算表，一步一步教我到 claude.ai/code/routines 怎麼設定。\n'+
+'最後把這個排程的名稱、時間和提醒條件寫進 CLAUDE.md。';
+
+    var nb=S.nb;
+    var payLine='付款方式：'+v(nb,'pay');
+    if((nb.pay||'').indexOf('卡')>=0||(nb.bankn||nb.cardno))payLine+='，發卡銀行 '+v(nb,'bankn')+'，'+cardWord()+' '+v(nb,'cardno');
+    $('p7a').textContent=
+N+'，今天送新件，幫我記到客戶表：\n'+
+'保險公司：'+v(nb,'co')+'\n'+'商品名稱：'+v(nb,'prod')+'\n'+
+'主約：'+v(nb,'main')+'　附約：'+v(nb,'rider')+'\n'+
+'要保人：'+v(nb,'ph')+'　被保人：'+v(nb,'ins')+'　受益人：'+v(nb,'ben')+'\n'+
+'繳別：'+v(nb,'mode')+'　每期保費：'+v(nb,'prem')+'　生效日：'+v(nb,'eff')+'\n'+payLine+'\n\n'+
+'要保人如果是新客戶，就在「客戶紀錄」新增一列。卡號照 CLAUDE.md 的個資規則處理。\n'+
+'寫「（待補）」的欄位問我，問完再一次寫進去，寫好後把這一列唸給我確認。';
+
+    var cc=S.cc;
+    $('p7b').textContent=
+N+'，'+v(cc,'who')+' 的「'+v(cc,'pol')+'」改用新的信用卡扣款：\n'+
+'發卡銀行：'+v(cc,'nbank')+'，'+cardWord()+'：'+v(cc,'ncard')+'，變更日期：'+v(cc,'date')+'。\n\n'+
+'幫我更新「保單明細」這張保單的付款資料，並在「變更紀錄」寫上變更日期，以及舊卡的發卡銀行和末四碼。\n'+
+'卡號照 CLAUDE.md 的個資規則處理，找不到這張保單或有好幾張符合時先問我。';
+
+    $('p7c').textContent=
+N+'，這禮拜該聯絡哪些客戶？每位附上下一步要做什麼。\n\n'+
+N+'，王小明有哪幾張保單？受益人各是誰？\n\n'+
+N+'，陳美玲說明年過年後再談，幫我把下次約訪日記成 2027/02/22，狀態改暫緩。\n\n'+
+N+'，今天跟林大同見面，聊了退休規劃，他想再比較一下，下週三再約，幫我更新。';
+    save();
+  }
+  drawDays();render();
+
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var pre=$(b.getAttribute('data-for'));var txt=pre.textContent;
+      function ok(){b.textContent='已複製';b.classList.add('done');setTimeout(function(){b.textContent='複製';b.classList.remove('done');},1800);}
+      function fallback(){try{var r=document.createRange();r.selectNodeContents(pre);var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已選取，請按複製';}catch(e){}}
+      try{navigator.clipboard.writeText(txt).then(ok,fallback);}catch(e){fallback();}
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
